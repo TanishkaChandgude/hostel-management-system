@@ -3,6 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const Leave = require("./models/leave");
 const cors = require("cors");
+const Notice = require("./models/notice");
 require("dotenv").config();
 
 const Student = require("./models/student");
@@ -253,3 +254,56 @@ res.status(500).json({error:"Server error"});
 }
 
 });
+
+
+app.post("/add-notice", async(req,res)=>{
+
+try{
+
+const notice = new Notice(req.body);
+
+await notice.save();
+
+res.json({message:"Notice added successfully"});
+
+}
+catch(err){
+console.log(err);
+res.status(500).json({error:"Server error"});
+}
+
+});
+
+app.get("/notices", async(req,res)=>{
+
+try{
+
+const notices = await Notice.find().sort({date:-1});
+
+res.json(notices);
+
+}
+catch(err){
+console.log(err);
+res.status(500).json({error:"Server error"});
+}
+
+});
+
+
+app.delete("/delete-notice/:id", async(req,res)=>{
+
+try{
+
+await Notice.findByIdAndDelete(req.params.id);
+
+res.json({message:"Notice deleted successfully"});
+
+}
+catch(err){
+console.log(err);
+res.status(500).json({error:"Server error"});
+}
+
+});
+

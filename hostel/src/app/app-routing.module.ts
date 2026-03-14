@@ -12,6 +12,7 @@ import { ManageStudentsComponent } from './admin/manage-students/manage-students
 import { ManageComplaintsComponent } from './admin/manage-complaints/manage-complaints.component';
 import { ManageLeavesComponent } from './admin/manage-leaves/manage-leaves.component';
 import { ManageNoticesComponent } from './admin/manage-notices/manage-notices.component';
+import { NoticeComponent } from './notice/notice.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -23,7 +24,8 @@ component:StudentLayoutComponent,
 children:[
  { path:'leave', component: LeaveComponent },
 { path:'student-dashboard', component: StudentDashboardComponent },
-{ path:'complaint', component: ComplaintComponent } ]},
+{ path:'complaint', component: ComplaintComponent },
+{path:'notice', component:NoticeComponent} ]},
 {
   path:'admins',
   component:AdminLayoutComponent,

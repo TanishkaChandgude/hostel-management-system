@@ -17,6 +17,8 @@ import { ManageComplaintsComponent } from './admin/manage-complaints/manage-comp
 import { ManageLeavesComponent } from './admin/manage-leaves/manage-leaves.component';
 import { RouterModule } from '@angular/router';
 import { ManageNoticesComponent } from './admin/manage-notices/manage-notices.component';
+import { NoticeComponent } from './notice/notice.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -32,13 +34,15 @@ import { ManageNoticesComponent } from './admin/manage-notices/manage-notices.co
     ManageStudentsComponent,
     ManageComplaintsComponent,
     ManageLeavesComponent,
-    ManageNoticesComponent
+    ManageNoticesComponent,
+    NoticeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     RouterModule,
+    CommonModule,
     HttpClientModule
   ],
   providers: [],

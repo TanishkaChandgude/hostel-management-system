@@ -1,62 +1,90 @@
+/* Layout structure */
+
 .layout{
-display:flex;
-height:100vh;
-font-family:Arial, Helvetica, sans-serif;
+  display: flex;
 }
 
+/* Sidebar */
+
 .sidebar{
-width:260px;
-background:#f5f6fa;
-padding:20px;
-border-right:1px solid #ddd;
+  width: 240px;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background: #2c3e50;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Logo section */
+
+.logo{
+  text-align: center;
+  padding: 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
 .logo h3{
-background:#0b0b2e;
-color:white;
-width:40px;
-height:40px;
-display:flex;
-align-items:center;
-justify-content:center;
-border-radius:10px;
+  margin: 0;
+  font-size: 28px;
 }
 
 .logo p{
-font-weight:bold;
-margin:5px 0;
+  margin: 5px 0;
+  font-weight: 500;
 }
 
+.logo small{
+  font-size: 11px;
+  color: #bdc3c7;
+}
+
+/* Menu */
+
 .menu{
-list-style:none;
-padding:0;
-margin-top:30px;
+  list-style: none;
+  padding: 10px;
+  margin: 0;
 }
 
 .menu li{
-padding:12px;
-margin-bottom:8px;
-cursor:pointer;
-border-radius:8px;
+  padding: 12px 15px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: 0.3s;
 }
 
 .menu li:hover{
-background:#e6e8f0;
+  background: #34495e;
 }
+
+/* Active route */
 
 .active{
-background:#0b0b2e;
-color:white;
+  background: #1abc9c;
 }
+
+/* Logout */
 
 .logout{
-margin-top:40px;
-cursor:pointer;
-color:#444;
+  padding: 15px;
+  text-align: center;
+  cursor: pointer;
+  background: #e74c3c;
 }
 
+.logout:hover{
+  background: #c0392b;
+}
+
+/* Content area */
+
 .content{
-flex:1;
-padding:30px;
-background:#fafafa;
+  margin-left: 240px;
+  padding: 25px;
+  width: 100%;
 }

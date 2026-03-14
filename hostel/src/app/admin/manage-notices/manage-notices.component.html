@@ -1,6 +1,9 @@
-<h2>Add Notice</h2>
+<h2 class="title">Notice Management</h2>
 
-<input type="text"
+<div class="notice-form">
+
+<input
+type="text"
 placeholder="Notice Title"
 [(ngModel)]="notice.title"
 name="title">
@@ -11,3 +14,26 @@ placeholder="Notice Description"
 name="description"></textarea>
 
 <button (click)="addNotice()">Post Notice</button>
+
+</div>
+
+
+<div class="notice-list">
+
+<div class="notice-card" *ngFor="let n of notices">
+
+<div class="notice-header">
+<h3>{{n.title}}</h3>
+<button class="delete-btn"
+(click)="deleteNotice(n._id)">
+Delete
+</button>
+</div>
+
+<p>{{n.description}}</p>
+
+<small>{{n.date | date:'dd MMM yyyy'}}</small>
+
+</div>
+
+</div>

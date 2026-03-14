@@ -1,0 +1,11 @@
+<h2>Hostel Notices</h2>
+
+<div *ngFor="let n of notices" class="notice-card">
+
+<h3>{{n.title}}</h3>
+
+<p>{{n.description}}</p>
+
+<small>{{n.date | date:'dd MMM yyyy,hh:mm a'}}</small>
+
+</div>
