@@ -1,0 +1,13 @@
+<h2>Add Notice</h2>
+
+<input type="text"
+placeholder="Notice Title"
+[(ngModel)]="notice.title"
+name="title">
+
+<textarea
+placeholder="Notice Description"
+[(ngModel)]="notice.description"
+name="description"></textarea>
+
+<button (click)="addNotice()">Post Notice</button>

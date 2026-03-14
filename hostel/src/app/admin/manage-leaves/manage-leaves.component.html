@@ -1,0 +1,42 @@
+<h2 class="title">Leave Requests</h2>
+
+<table class="leave-table">
+
+<tr>
+<th>Email</th>
+<th>From</th>
+<th>To</th>
+<th>Reason</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+
+<tr *ngFor="let l of leaves">
+
+<td>{{l.studentEmail}}</td>
+<td>{{l.fromDate | date:'dd MMM yyyy'}}</td>
+<td>{{l.toDate | date:'dd MMM yyyy'}}</td>
+<td>{{l.reason}}</td>
+<td>
+<span class="status" [ngClass]="l.status.toLowerCase()">
+{{l.status}}
+</span>
+</td>
+
+<td>
+
+<button class="approve-btn"
+(click)="approveLeave(l._id)">
+Approve
+</button>
+
+<button class="reject-btn"
+(click)="rejectLeave(l._id)">
+Reject
+</button>
+
+</td>
+
+</tr>
+
+</table>

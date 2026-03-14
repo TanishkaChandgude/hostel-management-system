@@ -1,0 +1,38 @@
+<div class="page">
+
+<div class="complaint-card">
+
+<h2>Submit a Complaint</h2>
+<p class="subtitle">Report any issue in your hostel room or facilities</p>
+
+<form (ngSubmit)="submitComplaint()">
+
+<div class="form-group">
+<label>Complaint Title</label>
+<input 
+type="text" 
+[(ngModel)]="complaint.title" 
+name="title" 
+placeholder="Enter complaint title"
+required>
+</div>
+
+<div class="form-group">
+<label>Description</label>
+<textarea 
+[(ngModel)]="complaint.description" 
+name="description" 
+placeholder="Describe your issue..."
+rows="4"
+required></textarea>
+</div>
+
+<button type="submit" class="submit-btn">
+Submit Complaint
+</button>
+
+</form>
+
+</div>
+
+</div>

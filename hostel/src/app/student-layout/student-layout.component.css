@@ -1,0 +1,62 @@
+.layout{
+display:flex;
+height:100vh;
+font-family:Arial, Helvetica, sans-serif;
+}
+
+.sidebar{
+width:260px;
+background:#f5f6fa;
+padding:20px;
+border-right:1px solid #ddd;
+}
+
+.logo h3{
+background:#0b0b2e;
+color:white;
+width:40px;
+height:40px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:10px;
+}
+
+.logo p{
+font-weight:bold;
+margin:5px 0;
+}
+
+.menu{
+list-style:none;
+padding:0;
+margin-top:30px;
+}
+
+.menu li{
+padding:12px;
+margin-bottom:8px;
+cursor:pointer;
+border-radius:8px;
+}
+
+.menu li:hover{
+background:#e6e8f0;
+}
+
+.active{
+background:#0b0b2e;
+color:white;
+}
+
+.logout{
+margin-top:40px;
+cursor:pointer;
+color:#444;
+}
+
+.content{
+flex:1;
+padding:30px;
+background:#fafafa;
+}

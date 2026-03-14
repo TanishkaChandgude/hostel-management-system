@@ -1,0 +1,29 @@
+<h2>Student Complaints</h2>
+
+<table class="table table-bordered">
+
+<tr>
+<th>Email</th>
+<th>Title</th>
+<th>Description</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+
+<tr *ngFor="let c of complaints">
+
+<td>{{c.email}}</td>
+<td>{{c.title}}</td>
+<td>{{c.description}}</td>
+<td>{{c.status}}</td>
+
+<td>
+<button class="btn btn-success"
+(click)="resolveComplaint(c._id)">
+Resolve
+</button>
+</td>
+
+</tr>
+
+</table>

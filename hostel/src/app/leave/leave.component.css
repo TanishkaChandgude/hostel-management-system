@@ -1,0 +1,41 @@
+.leave-container{
+max-width:700px;
+margin:auto;
+background:white;
+padding:25px;
+border-radius:10px;
+box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+
+.form-group{
+margin-bottom:15px;
+display:flex;
+flex-direction:column;
+}
+
+input,textarea{
+padding:8px;
+border:1px solid #ccc;
+border-radius:6px;
+}
+
+.apply-btn{
+background:#0b0b2e;
+color:white;
+padding:10px;
+border:none;
+border-radius:6px;
+cursor:pointer;
+}
+
+table{
+width:100%;
+margin-top:20px;
+border-collapse:collapse;
+}
+
+th,td{
+border:1px solid #ddd;
+padding:8px;
+text-align:center;
+}

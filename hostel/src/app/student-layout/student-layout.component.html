@@ -1,0 +1,60 @@
+<div class="layout">
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    
+    <div class="logo">
+      <h3>HH</h3>
+      <p>HostelHub</p>
+      <small>Smart Hostel Management System</small>
+    </div>
+
+    <ul class="menu">
+
+      <li routerLink="/student/student-dashboard" routerLinkActive="active">
+        Dashboard
+      </li>
+
+      <li routerLink="/student/attendance" routerLinkActive="active">
+        Attendance
+      </li>
+
+      <li routerLink="/student/leave" routerLinkActive="active">
+        Leave Management
+      </li>
+
+      <li routerLink="/student/mess" routerLinkActive="active">
+        Mess Menu
+      </li>
+
+      <li routerLink="/student/complaint" routerLinkActive="active">
+        Complaints & Feedback
+      </li>
+
+      <li routerLink="/student/notices" routerLinkActive="active">
+        Notices & Events
+      </li>
+
+      <li routerLink="/student/staff" routerLinkActive="active">
+        Staff Directory
+      </li>
+
+      <li routerLink="/student/corner" routerLinkActive="active">
+        Student Corner
+      </li>
+
+    </ul>
+
+    <div class="logout" routerLink="/login">
+      Logout
+    </div>
+
+  </div>
+
+
+  <!-- Page Content -->
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+
+</div>
