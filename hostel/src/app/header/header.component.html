@@ -1,0 +1,22 @@
+<div class="profile-container">
+  <div class="avatar" (click)="toggleDropdown()">
+    {{ initials }}
+  </div>
+
+  <div class="dropdown" *ngIf="dropdownOpen">
+    <div class="user-info">
+      <strong>{{ user?.fullName }}</strong>
+      <small>{{ user?.email }}</small>
+    </div>
+
+    <hr>
+
+    <button class="dropdown-item">My Profile</button>
+    <button class="dropdown-item">Settings</button>
+    <button class="dropdown-item">Help</button>
+
+    <hr>
+
+    <button class="dropdown-item logout" (click)="logout()">Logout</button>
+  </div>
+</div>

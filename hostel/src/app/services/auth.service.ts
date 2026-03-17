@@ -11,8 +11,26 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  login(data:any):Observable<any>{
+  // ✅ LOGIN
+  login(data: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/login`, data);
   }
 
+  // ✅ GET PROFILE
+  getProfile(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/user/profile`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }
+    });
+  }
+
+  // ✅ LOGOUT
+  logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('email');
+    localStorage.removeItem('role');
+    window.location.href = '/login';
+  }
 }
+ 

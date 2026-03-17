@@ -14,29 +14,31 @@ export class LoginComponent {
 
   constructor(private auth:AuthService, private router:Router){}
 
-  login(){
+  login() {
+  const data = {
+    email: this.email,
+    password: this.password
+  };
 
-    const data = {
-      email: this.email,
-      password: this.password
-    };
+  this.auth.login(data).subscribe((res: any) => {
 
-    this.auth.login(data).subscribe(res=>{
+    console.log("LOGIN RESPONSE:", res); // 🔥 DEBUG
 
-      localStorage.setItem("token",res.token);
-      localStorage.setItem("email", res.user.email);
-localStorage.setItem("role", res.user.role);
+    localStorage.setItem("token", res.token);
+    localStorage.setItem("email", res.user.email);
+    localStorage.setItem("role", res.user.role);
 
-      if(res.user.role === "admin"){
-        this.router.navigate(['/admins']);
-      }else{
-        this.router.navigate(['/student']);
-      }
+    if(res.user.role === "admin"){
+      this.router.navigate(['/admins']);
+    } else {
+      this.router.navigate(['/student']);
+    }
 
-    },err=>{
-      alert("Invalid login");
-    });
+  }, (err) => {
+    console.log("LOGIN ERROR:", err); // 🔥 DEBUG
+    alert("Invalid login");
+  });
+}
 
-  }
 
 }

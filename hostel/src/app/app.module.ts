@@ -19,6 +19,8 @@ import { RouterModule } from '@angular/router';
 import { ManageNoticesComponent } from './admin/manage-notices/manage-notices.component';
 import { NoticeComponent } from './notice/notice.component';
 import { CommonModule } from '@angular/common';
+import { ChatbotComponent } from './chatbot/chatbot.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import { CommonModule } from '@angular/common';
     ManageComplaintsComponent,
     ManageLeavesComponent,
     ManageNoticesComponent,
-    NoticeComponent
+    NoticeComponent,
+    ChatbotComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
