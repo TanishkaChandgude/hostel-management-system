@@ -19,6 +19,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path:'student', component:StudentLayoutComponent,
   children:[
+    { path: '', redirectTo: 'student-dashboard', pathMatch: 'full' },
   { path:'leave', component: LeaveComponent },
   { path:'student-dashboard', component: StudentDashboardComponent },
   { path:'complaint', component: ComplaintComponent },

@@ -94,3 +94,35 @@ transition:0.3s;
 background:#2e59d9;
 
 }
+
+
+.breadcrumb span:hover {
+  text-decoration: underline;
+}
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  margin-bottom: 20px;
+  color: #555;
+}
+
+.home {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.home:hover {
+  color: #000;
+}
+
+.separator {
+  margin: 0 8px;
+  color: #999;
+}
+
+.current {
+  color: #999;
+}

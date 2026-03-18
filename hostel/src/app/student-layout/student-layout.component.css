@@ -1,90 +1,169 @@
-/* Layout structure */
-
-.layout{
-  display: flex;
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f6f9;
 }
 
-/* Sidebar */
+/* Header */
+.top-header {
+  background: #e9ecef;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+  align-items: center;
+}
 
-.sidebar{
-  width: 240px;
-  height: 100vh;
-  position: fixed;
-  left: 0;
-  top: 0;
+.icons span {
+  margin: 0 10px;
+  cursor: pointer;
+}
+
+.profile {
   background: #2c3e50;
   color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-/* Logo section */
-
-.logo{
-  text-align: center;
-  padding: 20px;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-}
-
-.logo h3{
-  margin: 0;
-  font-size: 28px;
-}
-
-.logo p{
-  margin: 5px 0;
-  font-weight: 500;
-}
-
-.logo small{
-  font-size: 11px;
-  color: #bdc3c7;
-}
-
-/* Menu */
-
-.menu{
-  list-style: none;
+  border-radius: 50%;
   padding: 10px;
-  margin: 0;
 }
 
-.menu li{
-  padding: 12px 15px;
-  margin-bottom: 5px;
+/* User Info */
+.user-bar {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  background: white;
+}
+
+.user-bar img {
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.active {
+  color: green;
+  margin-left: 10px;
+}
+
+/* Search */
+.search-bar {
+  text-align: center;
+  margin: 20px;
+}
+
+.search-bar input {
+  width: 50%;
+  padding: 10px;
+  border: none;
+  border-bottom: 2px solid #ccc;
+}
+
+/* Layout */
+.dashboard {
+  display: flex;
+  padding: 20px;
+}
+
+/* Cards */
+.cards {
+  flex: 3;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.card {
+  background: linear-gradient(to bottom, #a3b8d8, #dfe6f1);
+  height: 120px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
   cursor: pointer;
-  border-radius: 6px;
   transition: 0.3s;
 }
 
-.menu li:hover{
-  background: #34495e;
+.card:hover {
+  transform: scale(1.05);
 }
 
-/* Active route */
-
-.active{
-  background: #1abc9c;
+/* Side Panel */
+.side-panel {
+  flex: 1;
+  margin-left: 20px;
 }
 
-/* Logout */
-
-.logout{
+.panel-box {
+  background: white;
   padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.cards {
+  flex: 3;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+/* Card Design */
+.card {
+  background: linear-gradient(to bottom, #b4c6e7, #eef3fb);
+  height: 160px;
+  border-radius: 20px;
   text-align: center;
+  padding-top: 20px;
+  position: relative;
   cursor: pointer;
-  background: #e74c3c;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
-.logout:hover{
-  background: #c0392b;
+/* Icon Circle */
+.icon {
+  width: 70px;
+  height: 70px;
+  background: white;
+  border-radius: 50%;
+  margin: 0 auto 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 26px;
+  color: #2c3e50;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.1);
 }
 
-/* Content area */
+/* Text */
+.card p {
+  font-weight: 600;
+  margin-top: 10px;
+}
 
-.content{
-  margin-left: 240px;
-  padding: 25px;
-  width: 100%;
+/* 🔥 Hover Animation */
+.card:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 15px 25px rgba(0,0,0,0.2);
+}
+
+/* Icon animation */
+.card:hover .icon {
+  transform: rotate(10deg) scale(1.1);
+  transition: 0.3s;
+}
+
+.profile-circle {
+  width: 35px;
+  height: 35px;
+  background: linear-gradient(to right, #1e3c72, #2a5298);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+}
+
+i {
+  cursor: pointer;
 }
