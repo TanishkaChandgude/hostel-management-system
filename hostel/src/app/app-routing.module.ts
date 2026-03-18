@@ -16,7 +16,7 @@ import { NoticeComponent } from './notice/notice.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
+  
   { path:'student', component:StudentLayoutComponent,
   children:[
     { path: '', redirectTo: 'student-dashboard', pathMatch: 'full' },
@@ -27,11 +27,13 @@ const routes: Routes = [
    {path: 'login', component: LoginComponent } ]},
   { path:'admins', component:AdminLayoutComponent,
   children:[
+     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     {path:'dashboard',component:AdminDashboardComponent},
     {path:'students',component:ManageStudentsComponent},
     {path:'complaints',component:ManageComplaintsComponent},
     {path:'leaves',component:ManageLeavesComponent},
     {path:'notices',component:ManageNoticesComponent},
+    { path: 'register', component: RegisterComponent },
     {path: 'login', component: LoginComponent }
 
   ]

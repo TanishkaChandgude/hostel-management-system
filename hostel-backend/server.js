@@ -38,59 +38,114 @@ app.listen(5000,()=>{
 const bcrypt = require("bcryptjs");
 const User = require("./models/user");
 
-app.post("/register", async (req,res)=>{
-  try{
+//const Student = require('./models/student');
+//const bcrypt = require('bcrypt');
 
-    const {name,email,password,role} = req.body;
+app.post("/register", async (req, res) => {
+  try {
 
-    const hashedPassword = await bcrypt.hash(password,10);
-
-    const user = new User({
+    const {
       name,
       email,
-      password: hashedPassword,
-      role
+      password,
+      branch,
+      rollNo,
+      roomNo,
+      year
+    } = req.body;
+
+    // ✅ validation
+    if (!name || !email || !password || !branch || !rollNo || !roomNo || !year) {
+      return res.status(400).json({ error: "All fields are required" });
+    }
+
+    // ❗ check existing student
+    const existingStudent = await Student.findOne({ email });
+    if (existingStudent) {
+      return res.status(400).json({ error: "Student already exists" });
+    }
+
+    // 🔒 hash password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // 💾 save student
+    const student = new Student({
+      name,
+      email,
+      password: hashedPassword, // store here instead
+      branch,
+      rollNo,
+      roomNo,
+      year,
+      
     });
 
-    await user.save();
+    await student.save();
 
-    res.json({message:"User registered successfully"});
+    res.json({ message: "Student registered successfully" });
 
-  }
-  catch(err){
+  } catch (err) {
     console.log(err);
-    res.status(500).json({error:"Server error"});
+    res.status(500).json({ error: "Server error" });
   }
 });
+
 app.post("/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
 
-  const { email, password } = req.body;
+    // First check if student
+    let user = await Student.findOne({ email });
+    let type = "student";
 
-  const user = await User.findOne({ email });
-
-  if (!user) {
-    return res.status(400).json({ message: "User not found" });
-  }
-
-  const isMatch = await bcrypt.compare(password, user.password);
-
-  if (!isMatch) {
-    return res.status(400).json({ message: "Invalid credentials" });
-  }
-
-  const token = jwt.sign({ id: user._id }, "secretkey");
-
-  res.json({
-    message: "Login successful",
-    token: token,
-    user: {
-      email: user.email,
-      role: user.role
+    if (!user) {
+      // If not student, check admin
+      user = await User.findOne({ email });
+      type = "admin";
     }
-  });
 
+    if (!user) {
+      return res.status(400).json({ message: "User not found" });
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ message: "Invalid credentials" });
+    }
+
+    // Create JWT (optional, can use for auth)
+    const token = jwt.sign({ id: user._id, role: type }, "secretkey");
+
+    // Send user data according to type
+    let userData;
+    if (type === "student") {
+      userData = {
+        name: user.name,
+        email: user.email,
+        branch: user.branch,
+        rollNo: user.rollNo,
+        roomNo: user.roomNo,
+        year: user.year,
+        role: "student"
+      };
+    } else {
+      userData = {
+        name: user.name,
+        email: user.email,
+        role: "admin"
+      };
+    }
+
+    res.json({
+      message: "Login successful",
+      token: token,
+      user: userData
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Server error" });
+  }
 });
-
 const Complaint = require('./models/Complaint');
 
 app.post('/add-complaint', async(req,res)=>{
@@ -256,54 +311,74 @@ res.status(500).json({error:"Server error"});
 });
 
 
-app.post("/add-notice", async(req,res)=>{
 
-try{
 
-const notice = new Notice(req.body);
 
-await notice.save();
+const multer = require('multer');
+const path = require('path');
 
-res.json({message:"Notice added successfully"});
-
-}
-catch(err){
-console.log(err);
-res.status(500).json({error:"Server error"});
-}
-
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/');
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + path.extname(file.originalname));
+  }
 });
 
-app.get("/notices", async(req,res)=>{
+const upload = multer({
+  storage: storage,
+  limits: { fileSize: 5 * 1024 * 1024 },
+  fileFilter: (req, file, cb) => {
+    const allowedTypes = /jpg|jpeg|png|pdf/;
+    const ext = path.extname(file.originalname).toLowerCase();
 
-try{
-
-const notices = await Notice.find().sort({date:-1});
-
-res.json(notices);
-
-}
-catch(err){
-console.log(err);
-res.status(500).json({error:"Server error"});
-}
-
+    if (allowedTypes.test(ext)) {
+      cb(null, true);
+    } else {
+      cb("Only images and PDFs allowed", false);
+    }
+  }
 });
 
+app.post('/notices', upload.single('file'), async (req, res) => {
+  try {
+    console.log("BODY:", req.body);
+    console.log("FILE:", req.file);
 
-app.delete("/delete-notice/:id", async(req,res)=>{
+    const newNotice = new Notice({
+      title: req.body.title,
+      description: req.body.description || "",
+      fileUrl: req.file ? req.file.filename : null, // ✅ FIX
+      date: new Date()
+    });
 
-try{
+    await newNotice.save();
 
-await Notice.findByIdAndDelete(req.params.id);
+    res.json({ message: "Notice uploaded" });
 
-res.json({message:"Notice deleted successfully"});
-
-}
-catch(err){
-console.log(err);
-res.status(500).json({error:"Server error"});
-}
-
+  } catch (err) {
+    console.log("ERROR:", err); // 👈 IMPORTANT
+    res.status(500).json({ error: "Upload failed" });
+  }
+});
+app.get('/notices', async (req, res) => {
+  try {
+    const notices = await Notice.find().sort({ date: -1 });
+    res.json(notices);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Server error" });
+  }
 });
 
+app.delete('/delete-notice/:id', async (req, res) => {
+  try {
+    await Notice.findByIdAndDelete(req.params.id);
+    res.json({ message: "Notice deleted successfully" });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+app.use('/uploads', express.static('uploads'));

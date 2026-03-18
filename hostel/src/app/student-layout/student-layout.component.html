@@ -5,8 +5,8 @@
 
     <!-- Left: Logo -->
     <div class="d-flex align-items-center gap-2">
-      <img src="assets/logo.png" width="40" height="40">
-      <span class="fw-bold">Vidyapeeth Portal</span>
+      <img src="assets/logovp.png" width="40" height="40">
+      <span class="fw-bold">VIDYAPRATISTHANS HOSTEL A </span>
     </div>
 
     <!-- Right: Icons -->
@@ -29,7 +29,12 @@
       <i class="fas fa-expand"></i>
 
       <!-- Profile -->
-      <div class="profile-circle">KK</div>
+      <div class="profile-circle" (click)="toggleDropdown()">{{userInitial}}
+        <div class="dropdown" *ngIf="showDropdown">
+      <p class="name">{{ user }}</p>
+      <button (click)="logout()">Logout</button>
+    </div>
+      </div>
 
     </div>
   </div>
@@ -37,16 +42,17 @@
   <!-- 🔷 USER INFO BAR -->
   <div class="container-fluid bg-white border-bottom py-2 px-3 d-flex align-items-center gap-3">
 
-    <img src="assets/profile.png" class="rounded-circle" width="45" height="45">
+    <img src="assets/user.avif" class="rounded-circle" width="45" height="45">
 
     <div class="d-flex align-items-center gap-3 flex-wrap">
-      <strong>KAJAL KALSULE</strong>
+      <strong>{{user}}</strong>
 
       <span class="badge bg-success">● Active</span>
 
-      <span>Registration No: EN25201007</span>
+      <span>Registration No: {{users.rollNo}}</span>
 
-      <span>B.Tech Computer Engineering</span>
+      <span>Branch : {{users.branch}}</span>
+      <span>Room NO :{{users.roomNo}}</span>
     </div>
 
   </div>

@@ -1,82 +1,154 @@
-.leave-container{
-max-width:700px;
-margin:auto;
-background:white;
-padding:25px;
-border-radius:10px;
-box-shadow:0 2px 8px rgba(0,0,0,0.1);
-margin-top: 60px;
+/* Background */
+body {
+  background: linear-gradient(to right, #eef2f3, #dfe9f3);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.form-group{
-margin-bottom:15px;
-display:flex;
-flex-direction:column;
-}
-
-input,textarea{
-padding:8px;
-border:1px solid #ccc;
-border-radius:6px;
-}
-
-.apply-btn{
-background:#0b0b2e;
-color:white;
-padding:10px;
-border:none;
-border-radius:6px;
-cursor:pointer;
-}
-
-table{
-width:100%;
-margin-top:20px;
-border-collapse:collapse;
-}
-
-th,td{
-border:1px solid #ddd;
-padding:8px;
-text-align:center;
-}
+/* Breadcrumb */
 .breadcrumb {
-  margin-bottom: 15px;
+  max-width: 900px;
+  margin: 15px auto;
   font-size: 14px;
-}
-
-.breadcrumb span {
-  cursor: pointer;
-  color: #3498db;
-}
-
-.breadcrumb span:hover {
-  text-decoration: underline;
-}
-.breadcrumb {
-  display: flex;
-  align-items: center;
-  font-size: 15px;
-  margin-bottom: 20px;
   color: #555;
 }
 
-.home {
+.breadcrumb .home {
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 5px;
+  color: #4a90e2;
+  font-weight: 500;
 }
 
-.home:hover {
-  color: #000;
+.breadcrumb .home:hover {
+  text-decoration: underline;
 }
 
 .separator {
-  margin: 0 8px;
-  color: #999;
+  margin: 0 5px;
 }
 
 .current {
-  color: #999;
+  color: #888;
+}
+
+/* Container */
+.leave-container {
+  max-width: 900px;
+  margin: auto;
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+/* Heading */
+.leave-container h2 {
+  text-align: center;
+  background: linear-gradient(135deg, #4a90e2, #357abd);
+  color: white;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+/* Form */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  transition: 0.3s;
+}
+
+/* Focus effect */
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #4a90e2;
+  outline: none;
+  box-shadow: 0 0 5px rgba(74,144,226,0.3);
+}
+
+/* Button */
+.apply-btn {
+  width: 100%;
+  padding: 10px;
+  background: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 15px;
+}
+
+.apply-btn:hover {
+  background: #2f6fb5;
+}
+
+/* Disabled button */
+.apply-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+/* Divider */
+hr {
+  margin: 25px 0;
+}
+
+/* Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+/* Header */
+table th {
+  background: #4a90e2;
+  color: white;
+  padding: 10px;
+}
+
+/* Rows */
+table td {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+}
+
+/* Hover effect */
+table tr:hover {
+  background: #f5f9ff;
+}
+
+/* Status styling */
+table td:last-child {
+  font-weight: 500;
+}
+
+/* Optional: status colors */
+td:has(span.pending), 
+td.pending {
+  color: #d35400;
+}
+
+td:has(span.approved), 
+td.approved {
+  color: #2e7d32;
+}
+
+td:has(span.rejected), 
+td.rejected {
+  color: #c0392b;
 }

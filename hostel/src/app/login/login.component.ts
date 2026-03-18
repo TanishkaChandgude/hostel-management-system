@@ -19,14 +19,16 @@ export class LoginComponent {
     email: this.email,
     password: this.password
   };
+ 
 
   this.auth.login(data).subscribe((res: any) => {
 
     console.log("LOGIN RESPONSE:", res); // 🔥 DEBUG
-
-    localStorage.setItem("token", res.token);
-    localStorage.setItem("email", res.user.email);
-    localStorage.setItem("role", res.user.role);
+     sessionStorage.setItem("user", JSON.stringify(res.user));
+    sessionStorage.setItem("name",res.user.name);
+    sessionStorage.setItem("token", res.token);
+    sessionStorage.setItem("email", res.user.email);
+    sessionStorage.setItem("role", res.user.role);
 
     if(res.user.role === "admin"){
       this.router.navigate(['/admins']);

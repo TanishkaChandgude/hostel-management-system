@@ -1,21 +1,55 @@
 <div class="register-page">
-<div class="register-container">
 
-  <h2>Create Account</h2>
+  <div class="register-container">
 
-  <form (ngSubmit)="register()">
+    <h2>🎓 Create Student Account</h2>
 
-    <input type="text" placeholder="Full Name" [(ngModel)]="user.name" name="name" required>
+    <form (ngSubmit)="register()">
 
-    <input type="email" placeholder="Email" [(ngModel)]="user.email" name="email" required>
+      <div class="form-group">
+        <input type="text" placeholder="Full Name"
+          [(ngModel)]="user.name" name="name" required>
+      </div>
 
-    <input type="password" placeholder="Password" [(ngModel)]="user.password" name="password" required>
+      <div class="form-group">
+        <input type="email" placeholder="Email"
+          [(ngModel)]="user.email" name="email" required>
+      </div>
 
-   
+      <div class="form-group">
+        <input type="password" placeholder="Password"
+          [(ngModel)]="user.password" name="password" required>
+      </div>
 
-    <button type="submit">Register</button>
+      <div class="form-group">
+        <input type="text" placeholder="Branch (e.g. CSE, IT)"
+          [(ngModel)]="user.branch" name="branch" required>
+      </div>
 
-  </form>
+      <div class="form-group">
+        <input type="text" placeholder="Roll Number"
+          [(ngModel)]="user.rollNo" name="rollNo" required>
+      </div>
 
-</div>
+      <div class="form-group">
+        <input type="text" placeholder="Allocated Room No"
+          [(ngModel)]="user.roomNo" name="roomNo" required>
+      </div>
+
+      <div class="form-group">
+        <select [(ngModel)]="user.year" name="year" required>
+          <option value="" disabled selected>Select Year of Study</option>
+          <option value="1">1st Year</option>
+          <option value="2">2nd Year</option>
+          <option value="3">3rd Year</option>
+          <option value="4">4th Year</option>
+        </select>
+      </div>
+
+      <button type="submit">Register</button>
+
+    </form>
+
+  </div>
+
 </div>

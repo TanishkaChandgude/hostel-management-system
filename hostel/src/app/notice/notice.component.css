@@ -1,21 +1,122 @@
-.header{
-    margin-top: 60px;
+/* Background */
+body {
+  background: linear-gradient(to right, #eef2f3, #dfe9f3);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.notice-card{
-
-background:white;
-padding:20px;
-margin-bottom:15px;
-border-radius:10px;
-box-shadow:0 3px 10px rgba(0,0,0,0.1);
-
+/* Header */
+.header {
+  text-align: center;
+  padding: 20px;
+  background: linear-gradient(135deg, #4a90e2, #357abd);
+  color: white;
+  border-radius: 0 0 15px 15px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
-.notice-card h3{
-color:#2c3e50;
+.header h2 {
+  margin: 0;
+  font-size: 26px;
+  letter-spacing: 1px;
 }
 
-.notice-card small{
-color:gray;
+/* Notice Card */
+.notice-card {
+  background: white;
+  padding: 18px 22px;
+  margin: 15px auto;
+  max-width: 800px;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+  transition: 0.3s;
+}
+
+.notice-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+}
+
+/* Title */
+.title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+/* Date */
+.date {
+  font-size: 13px;
+  color: #777;
+  margin-bottom: 12px;
+  font-style: italic;
+}
+
+/* Button */
+a {
+  display: inline-block;
+  margin-top: 5px;
+  padding: 8px 14px;
+  background: #4a90e2;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+a:hover {
+  background: #2f6fb5;
+}
+
+/* Image */
+img {
+  display: block;
+  margin-top: 12px;
+  border-radius: 8px;
+  max-width: 100%;
+  height: auto;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+
+.breadcrumb {
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.breadcrumb span {
+  cursor: pointer;
+  color: #3498db;
+}
+
+.breadcrumb span:hover {
+  text-decoration: underline;
+}
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  margin-bottom: 20px;
+  color: #555;
+}
+
+.home {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.home:hover {
+  color: #000;
+}
+
+.separator {
+  margin: 0 8px;
+  color: #999;
+}
+
+.current {
+  color: #999;
 }

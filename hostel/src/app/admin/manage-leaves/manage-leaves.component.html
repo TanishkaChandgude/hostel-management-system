@@ -1,3 +1,12 @@
+
+<div class="breadcrumb">
+  <span class="home" routerLink="/admins/dashboard">
+    <i class="fas fa-home"></i> Home
+  </span>
+  <span class="separator">/</span>
+  <span class="current">Notices</span>
+</div>
+
 <h2 class="title">Leave Requests</h2>
 
 <table class="leave-table">
@@ -13,7 +22,7 @@
 
 <tr *ngFor="let l of leaves">
 
-<td>{{l.studentEmail}}</td>
+<td>{{l.studentName}}</td>
 <td>{{l.fromDate | date:'dd MMM yyyy'}}</td>
 <td>{{l.toDate | date:'dd MMM yyyy'}}</td>
 <td>{{l.reason}}</td>

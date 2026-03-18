@@ -1,22 +1,63 @@
-<div class="layout">
+<div class="main-container">
 
-  <div class="sidebar">
+  <!-- 🔷 TOP HEADER -->
+  <div class="container-fluid bg-light border-bottom py-2 px-3 d-flex justify-content-between align-items-center">
 
-    <h3 class="logo">Hostel Admin</h3>
+    <!-- Left: Logo -->
+    <div class="d-flex align-items-center gap-2">
+      <img src="assets/logovp.png" width="40" height="40">
+      <span class="fw-bold">VIDYAPRATISTHANS HOSTEL A </span>
+    </div>
 
-    <ul class="menu">
-      <li routerLink="/admins/dashboard" routerLinkActive="active">Dashboard</li>
-      <li routerLink="/admins/students"routerLinkActive="active">Students</li>
-      <li routerLink="/admins/complaints"routerLinkActive="active">Complaints</li>
-      <li routerLink="/admins/leaves" routerLinkActive="active">Leave Requests</li>
-      <li routerLink="/admins/notices" routerLinkActive="active">Notices & Events</li>
-    </ul>
-    <div class="logout" routerLink="">
-      Logout
+    <!-- Right: Icons -->
+    <div class="d-flex align-items-center gap-4">
+
+      <span class="text-success fw-semibold">4G ⚡ 10+ Mbps</span>
+
+      <i class="fas fa-home fs-5"></i>
+      <i class="fas fa-tachometer-alt fs-5"></i>
+      <i class="fas fa-question-circle fs-5"></i>
+
+      <i class="fas fa-user position-relative">
+        <span class="badge bg-warning position-absolute top-0 start-100 translate-middle p-1">7</span>
+      </i>
+
+      <i class="fas fa-bell position-relative">
+        <span class="badge bg-danger position-absolute top-0 start-100 translate-middle p-1">0</span>
+      </i>
+
+      <i class="fas fa-expand"></i>
+
+      <!-- Profile -->
+      <div class="profile-circle" (click)="toggleDropdown()">{{userInitial}}
+        <div class="dropdown" *ngIf="showDropdown">
+      <p class="name">{{ user }}</p>
+      <button (click)="logout()">Logout</button>
+    </div>
+      </div>
+
     </div>
   </div>
 
-  <div class="content">
+  <!-- 🔷 USER INFO BAR -->
+  <div class="container-fluid bg-white border-bottom py-2 px-3 d-flex align-items-center gap-3">
+
+    <img src="assets/user.avif" class="rounded-circle" width="45" height="45">
+
+    <div class="d-flex align-items-center gap-3 flex-wrap">
+      <strong>{{user}}</strong>
+
+      <span class="badge bg-success">● Active</span>
+
+      <span>Registration No: EN25201007</span>
+
+      <span>B.Tech Computer Engineering</span>
+    </div>
+
+  </div>
+
+  <!-- 🔥 ONLY THIS SHOULD CHANGE -->
+  <div class="main-content p-3">
     <router-outlet></router-outlet>
   </div>
 

@@ -1,15 +1,31 @@
-<div class="header">
-
-<h2>Hostel Notices</h2>
-
+<div class="breadcrumb">
+  <span class="home" routerLink="/student/student-dashboard">
+    <i class="fas fa-home"></i> Home
+  </span>
+  <span class="separator">/</span>
+  <span class="current">Notices</span>
 </div>
 
-<div *ngFor="let n of notices" class="notice-card">
+<div class="header">
+  <h2>📢 Hostel Notice Board</h2>
+</div>
 
-<h3>{{n.title}}</h3>
+<div class="notice-card" *ngFor="let notice of notices">
 
-<p>{{n.description}}</p>
+  <p class="title">{{ notice.title }}</p>
 
-<small>{{n.date | date:'dd MMM yyyy,hh:mm a'}}</small>
+  <!-- Date & Time -->
+  <p class="date">
+    🕒 {{ notice.date | date:'medium' }}
+  </p>
+
+  <!-- View File -->
+  <a [href]="'http://localhost:5000/uploads/' + notice.fileUrl" target="_blank">
+    View Notice
+  </a>
+
+  <!-- Image Preview -->
+  <img *ngIf="notice.fileUrl?.endsWith('.jpg') || notice.fileUrl?.endsWith('.png')"
+       [src]="'http://localhost:5000/uploads/' + notice.fileUrl">
 
 </div>

@@ -12,6 +12,10 @@ export class RegisterComponent  {
     name:"",
     email:"",
     password:"",
+    branch:"",
+    rollNo:"",
+    roomNo:"",
+    year:"",
     role:"student"
   };
 

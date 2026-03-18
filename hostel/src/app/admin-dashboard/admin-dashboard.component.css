@@ -1,0 +1,153 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f6f9;
+}
+
+/* Header */
+.top-header {
+  background: #e9ecef;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+  align-items: center;
+}
+
+.icons span {
+  margin: 0 10px;
+  cursor: pointer;
+}
+
+.profile {
+  background: #2c3e50;
+  color: white;
+  border-radius: 50%;
+  padding: 10px;
+}
+
+/* User Info */
+.user-bar {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  background: white;
+}
+
+.user-bar img {
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.active {
+  color: green;
+  margin-left: 10px;
+}
+
+/* Search */
+.search-bar {
+  text-align: center;
+  margin: 20px;
+}
+
+.search-bar input {
+  width: 50%;
+  padding: 10px;
+  border: none;
+  border-bottom: 2px solid #ccc;
+}
+
+/* Layout */
+.dashboard {
+  display: flex;
+  padding: 20px;
+}
+
+/* Cards */
+.cards {
+  flex: 3;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.card {
+  background: linear-gradient(to bottom, #a3b8d8, #dfe6f1);
+  height: 120px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+/* Side Panel */
+.side-panel {
+  flex: 1;
+  margin-left: 20px;
+}
+
+.panel-box {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.cards {
+  flex: 3;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+/* Card Design */
+.card {
+  background: linear-gradient(to bottom, #b4c6e7, #eef3fb);
+  height: 160px;
+  border-radius: 20px;
+  text-align: center;
+  padding-top: 20px;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* Icon Circle */
+.icon {
+  width: 70px;
+  height: 70px;
+  background: white;
+  border-radius: 50%;
+  margin: 0 auto 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 26px;
+  color: #2c3e50;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+}
+
+/* Text */
+.card p {
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+/* 🔥 Hover Animation */
+.card:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 15px 25px rgba(0,0,0,0.2);
+}
+
+/* Icon animation */
+.card:hover .icon {
+  transform: rotate(10deg) scale(1.1);
+  transition: 0.3s;
+}

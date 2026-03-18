@@ -25,8 +25,8 @@ ngOnInit(){
 
 applyLeave(){
 
-const email = localStorage.getItem("email");
-
+const email = sessionStorage.getItem("email");
+const user=sessionStorage.getItem("name");
 const from = new Date(this.leave.fromDate);
 const to = new Date(this.leave.toDate);
 const today = new Date();
@@ -48,7 +48,8 @@ const data = {
   reason: this.leave.reason,
   fromDate: this.leave.fromDate,
   toDate: this.leave.toDate,
-   status: "Pending"
+   status: "Pending",
+   studentName: user
 };
 
 this.http.post("http://localhost:5000/apply-leave",data)

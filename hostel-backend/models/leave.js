@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const leaveSchema = new mongoose.Schema({
 
   studentEmail:String,
+  studentName : String ,
 
   reason:String,
 

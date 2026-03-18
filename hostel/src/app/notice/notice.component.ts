@@ -13,14 +13,14 @@ notices:any[]=[];
 constructor(private http:HttpClient){}
 
 ngOnInit(){
+this.getNotices();
 
-this.http.get("http://localhost:5000/notices")
-.subscribe((data:any)=>{
-
-this.notices=data;
-
-});
 
 }
-
+getNotices() {
+  this.http.get('http://localhost:5000/notices')
+    .subscribe((data: any) => {
+      this.notices = data;
+    });
+}
 }

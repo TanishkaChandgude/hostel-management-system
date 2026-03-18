@@ -1,39 +1,65 @@
-<h2 class="title">Notice Management</h2>
 
-<div class="notice-form">
-
-<input
-type="text"
-placeholder="Notice Title"
-[(ngModel)]="notice.title"
-name="title">
-
-<textarea
-placeholder="Notice Description"
-[(ngModel)]="notice.description"
-name="description"></textarea>
-
-<button (click)="addNotice()">Post Notice</button>
-
+<div class="breadcrumb">
+  <span class="home" routerLink="/admins/dashboard">
+    <i class="fas fa-home"></i> Home
+  </span>
+  <span class="separator">/</span>
+  <span class="current">Notices</span>
 </div>
+<div class="container">
 
+  <h2 class="heading">📢 Manage Notices</h2>
 
-<div class="notice-list">
+  <!-- Add Notice Form -->
+  <div class="form-box">
+    
+    <input type="text"
+           [(ngModel)]="notice.title"
+           placeholder="Enter title">
 
-<div class="notice-card" *ngFor="let n of notices">
+    <textarea
+      [(ngModel)]="notice.description"
+      placeholder="Enter description">
+    </textarea>
 
-<div class="notice-header">
-<h3>{{n.title}}</h3>
-<button class="delete-btn"
-(click)="deleteNotice(n._id)">
-Delete
-</button>
-</div>
+    <input type="file" (change)="onFileSelect($event)">
 
-<p>{{n.description}}</p>
+    <button (click)="addNotice()">➕ Add Notice</button>
 
-<small>{{n.date | date:'dd MMM yyyy'}}</small>
+  </div>
 
-</div>
+  <!-- Notices List -->
+  <div class="notice-list">
+
+    <div class="card" *ngFor="let notice of notices">
+
+      <h3>{{ notice.title }}</h3>
+      <p class="desc">{{ notice.description }}</p>
+
+      <!-- Date -->
+      <p class="date">🕒 {{ notice.date | date:'medium' }}</p>
+
+      <!-- File Preview -->
+      <div *ngIf="notice.fileUrl">
+
+        <img *ngIf="notice.fileUrl.endsWith('.jpg') || notice.fileUrl.endsWith('.png')"
+             [src]="'http://localhost:5000/uploads/' + notice.fileUrl"
+             class="preview-img">
+
+        <a [href]="'http://localhost:5000/uploads/' + notice.fileUrl"
+           target="_blank">
+           📄 View File
+        </a>
+
+      </div>
+
+      <button class="delete-btn"
+              (click)="deleteNotice(notice._id)">
+        ❌ Delete
+      </button>
+
+    </div>
+
+  </div>
 
 </div>
