@@ -13,9 +13,11 @@
   </div>
 
   <div class="chat-body">
-    <div *ngFor="let msg of messages" class="message">
-      {{msg}}
-    </div>
+    <div *ngFor="let msg of messages" 
+     [ngClass]="msg.startsWith('You') ? 'user-msg' : 'bot-msg'">
+  {{msg}}
+</div>
+
   </div>
 
   <div class="chat-input">

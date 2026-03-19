@@ -78,3 +78,19 @@ color: white;
 border: none;
 cursor: pointer;
 }
+
+.user-msg {
+  text-align: right;
+  background-color: #DCF8C6;
+  margin: 5px;
+  padding: 8px;
+  border-radius: 10px;
+}
+
+.bot-msg {
+  text-align: left;
+  background-color: #f1f1f1;
+  margin: 5px;
+  padding: 8px;
+  border-radius: 10px;
+}
