@@ -18,7 +18,7 @@ this.getNotices();
 
 }
 getNotices() {
-  this.http.get('http://localhost:5000/notices')
+  this.http.get('http://localhost:5050/notices')
     .subscribe((data: any) => {
       this.notices = data;
     });

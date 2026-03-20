@@ -23,7 +23,7 @@ export class RegisterComponent  {
 
   register(){
 
-    this.http.post("http://localhost:5000/register",this.user)
+    this.http.post("http://localhost:5050/register",this.user)
     .subscribe((res:any)=>{
 
       alert("Registration Successful");

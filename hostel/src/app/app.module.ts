@@ -24,6 +24,8 @@ import { HeaderComponent } from './header/header.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { ManageFeedbackComponent } from './manage-feedback/manage-feedback.component';
 import { StaffComponent } from './staff/staff.component';
+import { MessComponent } from './mess/mess.component';
+import { AdminMessComponent } from './admin/mess/mess.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,9 @@ import { StaffComponent } from './staff/staff.component';
     HeaderComponent,
     FeedbackComponent,
     ManageFeedbackComponent,
-    StaffComponent
+    StaffComponent,
+    MessComponent,
+    AdminMessComponent
   ],
   imports: [
     BrowserModule,

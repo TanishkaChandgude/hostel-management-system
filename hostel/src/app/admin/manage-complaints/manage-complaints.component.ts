@@ -14,7 +14,7 @@ export class ManageComplaintsComponent {
 
   ngOnInit(){
 
-    this.http.get("http://localhost:5000/complaints")
+    this.http.get("http://localhost:5050/complaints")
     .subscribe((data:any)=>{
 
       this.complaints = data;
@@ -24,7 +24,7 @@ export class ManageComplaintsComponent {
   }
   resolveComplaint(id:any){
 
-this.http.put("http://localhost:5000/resolve-complaint/"+id,{})
+this.http.put("http://localhost:5050/resolve-complaint/"+id,{})
 .subscribe(res=>{
 
 alert("Complaint Resolved");

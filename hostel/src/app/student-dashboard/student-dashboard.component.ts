@@ -27,14 +27,16 @@ export class StudentDashboardComponent implements OnInit {
   { name: 'Feedback', icon: 'fas fa-comment-dots', route: '/student/feedback' }
 ];
 
-  ngOnInit() {
-    const email = localStorage.getItem("email");
+ ngOnInit() {
+  const email = localStorage.getItem("email");
 
-    this.http.get("http://localhost:5000/student-dashboard/" + email)
-      .subscribe((data: any) => {
-        this.dashboard = data;
-      });
-  }
+  this.http.get("http://localhost:5050/student-dashboard/" + email)
+    .subscribe((data: any) => {
+      console.log("Dashboard Data:", data); // 👈 ADD THIS
+      this.dashboard = data;
+    });
+}
+
 
   filteredModules() {
     return this.modules.filter(m =>

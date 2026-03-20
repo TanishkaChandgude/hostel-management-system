@@ -23,7 +23,7 @@ const data = {
   description:this.complaint.description
 }
 
-this.http.post("http://localhost:5000/add-complaint",data)
+this.http.post("http://localhost:5050/add-complaint",data)
 .subscribe(res=>{
   alert("Complaint Submitted");
 })

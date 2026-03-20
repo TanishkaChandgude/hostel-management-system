@@ -33,7 +33,7 @@ implements OnInit {
       formData.append('file', this.selectedFile);
     }
 
-    this.http.post("http://localhost:5000/notices", formData)
+    this.http.post("http://localhost:5050/notices", formData)
       .subscribe(() => {
         alert("✅ Notice Added");
 
@@ -48,7 +48,7 @@ implements OnInit {
   }
 
   getNotices() {
-    this.http.get("http://localhost:5000/notices")
+    this.http.get("http://localhost:5050/notices")
       .subscribe((data: any) => {
         this.notices = data;
       });
@@ -56,7 +56,7 @@ implements OnInit {
 
   deleteNotice(id: any) {
     if (confirm("Delete this notice?")) {
-      this.http.delete("http://localhost:5000/delete-notice/" + id)
+      this.http.delete("http://localhost:5050/delete-notice/" + id)
         .subscribe(() => {
           alert("🗑 Notice Deleted");
           this.getNotices();

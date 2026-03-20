@@ -12,14 +12,14 @@ export class ManageFeedbackComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
-    this.http.get("http://localhost:5000/feedback")
+    this.http.get("http://localhost:5050/feedback")
       .subscribe((data: any) => {
         this.feedbacks = data;
       });
   }
 
   updateStatus(f: any) {
-    this.http.put("http://localhost:5000/feedback-status", f)
+    this.http.put("http://localhost:5050/feedback-status", f)
       .subscribe(() => {
         alert("Status updated");
       });

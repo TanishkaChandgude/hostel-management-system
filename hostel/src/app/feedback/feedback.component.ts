@@ -28,7 +28,7 @@ export class FeedbackComponent {
 
   console.log("🔥 Submit clicked", this.feedback);
 
-  this.http.post("http://localhost:5000/feedback", this.feedback)
+  this.http.post("http://localhost:5050/feedback", this.feedback)
     .subscribe({
       next: () => {
 

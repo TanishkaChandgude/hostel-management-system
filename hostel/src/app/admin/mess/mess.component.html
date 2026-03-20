@@ -1,0 +1,41 @@
+<div class="container mt-4">
+
+  <h3>🍽️ Manage Mess Menu</h3>
+
+  <form (ngSubmit)="submit()">
+
+    <div class="mb-3">
+      <label>Day</label>
+      <select class="form-control" [(ngModel)]="formData.day" name="day" required>
+
+        <option value="">Select Day</option>
+        <option>Monday</option>
+        <option>Tuesday</option>
+        <option>Wednesday</option>
+        <option>Thursday</option>
+        <option>Friday</option>
+        <option>Saturday</option>
+        <option>Sunday</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label>Breakfast</label>
+      <input type="text" class="form-control" [(ngModel)]="formData.breakfast" name="breakfast">
+    </div>
+
+    <div class="mb-3">
+      <label>Lunch</label>
+      <input type="text" class="form-control" [(ngModel)]="formData.lunch" name="lunch">
+    </div>
+
+    <div class="mb-3">
+      <label>Dinner</label>
+      <input type="text" class="form-control" [(ngModel)]="formData.dinner" name="dinner">
+    </div>
+
+    <button class="btn btn-primary">Save Menu</button>
+
+  </form>
+
+</div>

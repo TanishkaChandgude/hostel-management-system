@@ -1,0 +1,23 @@
+<div class="container mt-4">
+
+  <h3 class="mb-4">🍽️ Weekly Mess Menu</h3>
+
+  <div class="row">
+    <div class="col-md-4 mb-3" *ngFor="let item of menu">
+
+      <div class="card shadow-sm p-3">
+
+        <h5 class="text-center">{{item.day}}</h5>
+
+        <hr>
+
+        <p><strong>🍳 Breakfast:</strong> {{item.breakfast}}</p>
+        <p><strong>🍛 Lunch:</strong> {{item.lunch}}</p>
+        <p><strong>🍽️ Dinner:</strong> {{item.dinner}}</p>
+
+      </div>
+
+    </div>
+  </div>
+
+</div>

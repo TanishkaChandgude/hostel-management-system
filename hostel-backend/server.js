@@ -1,3 +1,5 @@
+console.log("🔥 SERVER FILE RUNNING");
+
 const jwt = require("jsonwebtoken");
 const express = require("express");
 const mongoose = require("mongoose");
@@ -17,6 +19,10 @@ mongoose.connect(process.env.MONGO_URI)
 .then(()=> console.log("MongoDB Connected"))
 .catch(err => console.log(err));
 
+app.post('admin/mess', (req, res) => {
+  console.log("🔥 MESS HIT");
+  res.send("Working");
+});
 
 // API to add student
 app.post("/add-student", async (req,res)=>{
@@ -32,9 +38,12 @@ app.post("/add-student", async (req,res)=>{
   }
 });
 
-app.listen(5000,()=>{
-  console.log("Server running on port 5000");
+const PORT = 5050;
+
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on port ${PORT}`);
 });
+
 const bcrypt = require("bcryptjs");
 const User = require("./models/user");
 
@@ -272,47 +281,39 @@ res.json({message:"Leave Rejected"});
 });
 
 
-app.get("/student-dashboard/:email", async (req,res)=>{
+app.get('/student-dashboard/:email', async (req, res) => {
+  try {
+    const email = req.params.email;
 
-try{
+    console.log("📩 Email received:", email);
 
-const email = req.params.email;
+    // ✅ FIXED: case-insensitive email match
+    const student = await Student.findOne({
+      email: new RegExp(`^${email}$`, 'i')
+    });
 
-const totalComplaints = await Complaint.countDocuments({email});
+    console.log("👤 Student Found:", student);
 
-const pendingComplaints = await Complaint.countDocuments({
-email,
-status:"Pending"
+    // ✅ FIXED: correct field names
+    const leaves = await Leave.countDocuments({
+      studentEmail: email
+    });
+
+    const complaints = await Complaint.countDocuments({
+      email: email
+    });
+
+    res.json({
+      roomNo: student?.roomNo || "Not Assigned",
+      leaves: leaves,
+      complaints: complaints
+    });
+
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Server error" });
+  }
 });
-
-const approvedLeaves = await Leave.countDocuments({
-studentEmail:email,
-status:"Approved"
-});
-
-const pendingLeaves = await Leave.countDocuments({
-studentEmail:email,
-status:"Pending"
-});
-
-res.json({
-totalComplaints,
-pendingComplaints,
-approvedLeaves,
-pendingLeaves
-});
-
-}
-catch(err){
-console.log(err);
-res.status(500).json({error:"Server error"});
-}
-
-});
-
-
-
-
 
 const multer = require('multer');
 const path = require('path');
@@ -437,5 +438,43 @@ app.post("/feedback", async (req, res) => {
   } catch (err) {
     console.log("❌ Error:", err);
     res.status(500).json({ error: "Failed to save feedback" });
+  }
+});
+
+const Mess = require('./models/mess');
+
+app.post('/mess', async (req, res) => {
+  try {
+    const { day, breakfast, lunch, dinner } = req.body;
+
+    const existing = await Mess.findOne({ day });
+
+    if (existing) {
+      existing.breakfast = breakfast;
+      existing.lunch = lunch;
+      existing.dinner = dinner;
+
+      await existing.save();
+      return res.json({ message: "Menu updated" });
+    }
+
+    const newMenu = new Mess({ day, breakfast, lunch, dinner });
+    await newMenu.save();
+
+    res.json({ message: "Menu added" });
+
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+
+app.get('/mess', async (req, res) => {
+  try {
+    const menu = await Mess.find();
+    res.json(menu);
+  } catch (err) {
+    res.status(500).json({ error: "Error fetching menu" });
   }
 });

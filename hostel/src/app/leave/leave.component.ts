@@ -52,7 +52,7 @@ const data = {
    studentName: user
 };
 
-this.http.post("http://localhost:5000/apply-leave",data)
+this.http.post("http://localhost:5050/apply-leave",data)
 .subscribe(res=>{
 
 alert("Leave Applied");
@@ -68,7 +68,7 @@ getLeaves(){
 
 const email = localStorage.getItem("email");
 
-this.http.get("http://localhost:5000/my-leaves/"+email)
+this.http.get("http://localhost:5050/my-leaves/"+email)
 .subscribe((data:any)=>{
 
 this.leaves = data;

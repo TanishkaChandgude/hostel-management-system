@@ -14,7 +14,7 @@ leaves:any=[];
 
 ngOnInit(){
 
-this.http.get("http://localhost:5000/all-leaves")
+this.http.get("http://localhost:5050/all-leaves")
 .subscribe((data:any)=>{
 
 this.leaves=data;
@@ -24,7 +24,7 @@ this.leaves=data;
 }
 approveLeave(id:any){
 
-this.http.put("http://localhost:5000/approve-leave/"+id,{})
+this.http.put("http://localhost:5050/approve-leave/"+id,{})
 .subscribe(res=>{
 
 alert("Leave Approved");
@@ -37,7 +37,7 @@ this.ngOnInit();
 
 rejectLeave(id:any){
 
-this.http.put("http://localhost:5000/reject-leave/"+id,{})
+this.http.put("http://localhost:5050/reject-leave/"+id,{})
 .subscribe(res=>{
 
 alert("Leave Rejected");

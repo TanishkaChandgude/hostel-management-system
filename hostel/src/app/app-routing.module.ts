@@ -15,6 +15,8 @@ import { ManageNoticesComponent } from './admin/manage-notices/manage-notices.co
 import { NoticeComponent } from './notice/notice.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { StaffComponent } from './staff/staff.component';
+import { MessComponent } from './mess/mess.component';
+import { AdminMessComponent } from './admin/mess/mess.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -28,7 +30,9 @@ const routes: Routes = [
   { path:'notice', component:NoticeComponent},
   { path: 'login', component: LoginComponent },
   { path: 'feedback', component: FeedbackComponent },
-  { path: 'staff', component: StaffComponent } 
+  { path: 'staff', component: StaffComponent }, 
+  { path: 'mess', component: MessComponent},
+
   ]},
    
   { path:'admins', component:AdminLayoutComponent,
@@ -40,7 +44,8 @@ const routes: Routes = [
     {path:'leaves',component:ManageLeavesComponent},
     {path:'notices',component:ManageNoticesComponent},
     {path:'register',component: RegisterComponent },
-    {path: 'login', component: LoginComponent }
+    {path: 'login', component: LoginComponent },
+    {path: 'mess', component: AdminMessComponent}
 
   ]
 }

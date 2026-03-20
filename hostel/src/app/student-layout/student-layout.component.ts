@@ -30,4 +30,9 @@ logout() {
   sessionStorage.clear(); // or localStorage.clear()
   this.router.navigate(['']);
 }
+
+goHome() {
+  this.router.navigate(['/student']);   // 👈 IMPORTANT
+}
+
 }
