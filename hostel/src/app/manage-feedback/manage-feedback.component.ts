@@ -1,0 +1,27 @@
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-manage-feedback',
+  templateUrl: './manage-feedback.component.html'
+})
+export class ManageFeedbackComponent implements OnInit {
+
+  feedbacks: any[] = [];
+
+  constructor(private http: HttpClient) {}
+
+  ngOnInit() {
+    this.http.get("http://localhost:5000/feedback")
+      .subscribe((data: any) => {
+        this.feedbacks = data;
+      });
+  }
+
+  updateStatus(f: any) {
+    this.http.put("http://localhost:5000/feedback-status", f)
+      .subscribe(() => {
+        alert("Status updated");
+      });
+  }
+}

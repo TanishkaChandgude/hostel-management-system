@@ -21,6 +21,8 @@ import { NoticeComponent } from './notice/notice.component';
 import { CommonModule } from '@angular/common';
 import { ChatbotComponent } from './chatbot/chatbot.component';
 import { HeaderComponent } from './header/header.component';
+import { FeedbackComponent } from './feedback/feedback.component';
+import { ManageFeedbackComponent } from './manage-feedback/manage-feedback.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import { HeaderComponent } from './header/header.component';
     ManageNoticesComponent,
     NoticeComponent,
     ChatbotComponent,
-    HeaderComponent
+    HeaderComponent,
+    FeedbackComponent,
+    ManageFeedbackComponent
   ],
   imports: [
     BrowserModule,

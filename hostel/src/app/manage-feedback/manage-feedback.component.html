@@ -1,0 +1,31 @@
+<div class="container mt-4">
+
+  <h4 class="mb-3">📋 Feedback Management</h4>
+
+  <table class="table table-bordered table-striped">
+
+    <tr>
+      <th>Email</th>
+      <th>Category</th>
+      <th>Rating</th>
+      <th>Message</th>
+      <th>Status</th>
+    </tr>
+
+    <tr *ngFor="let f of feedbacks">
+      <td>{{f.email}}</td>
+      <td>{{f.category}}</td>
+      <td>⭐ {{f.rating}}</td>
+      <td>{{f.message}}</td>
+
+      <td>
+        <select [(ngModel)]="f.status" (change)="updateStatus(f)">
+          <option>Pending</option>
+          <option>Resolved</option>
+        </select>
+      </td>
+    </tr>
+
+  </table>
+
+</div>

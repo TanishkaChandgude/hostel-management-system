@@ -1,0 +1,63 @@
+<div class="breadcrumb">
+  <span class="home" routerLink="/student/student-dashboard">
+    <i class="fas fa-home"></i> Home
+  </span>
+  <span class="separator">/</span>
+  <span class="current">Feedback</span>
+</div>
+
+<div class="container mt-4">
+
+  <div class="card shadow p-4 feedback-card">
+
+    <h4 class="mb-3 text-primary">💬 Submit Feedback</h4>
+
+    <form #feedbackForm="ngForm" (ngSubmit)="submitFeedback()">
+
+      <!-- Category -->
+      <div class="mb-3">
+        <label class="form-label">Category</label>
+        <select class="form-control"
+                [(ngModel)]="feedback.category"
+                name="category"
+                required>
+
+          <option value="">Select</option>
+          <option *ngFor="let c of categories">{{c}}</option>
+
+        </select>
+      </div>
+
+      <!-- Rating -->
+      <div class="mb-3">
+        <label class="form-label">Rating</label>
+        <div class="stars">
+          <i class="fa fa-star"
+             *ngFor="let star of [1,2,3,4,5]"
+             [class.text-warning]="star <= feedback.rating"
+             (click)="setRating(star)">
+          </i>
+        </div>
+      </div>
+
+      <!-- Message -->
+      <div class="mb-3">
+        <label class="form-label">Message</label>
+        <textarea class="form-control"
+                  [(ngModel)]="feedback.message"
+                  name="message"
+                  rows="3"
+                  required></textarea>
+      </div>
+
+      <!-- Submit -->
+      <button class="btn btn-primary w-100"
+              [disabled]="feedbackForm.invalid">
+        Submit Feedback
+      </button>
+
+    </form>
+
+  </div>
+
+</div>

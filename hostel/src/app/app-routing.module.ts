@@ -13,18 +13,21 @@ import { ManageComplaintsComponent } from './admin/manage-complaints/manage-comp
 import { ManageLeavesComponent } from './admin/manage-leaves/manage-leaves.component';
 import { ManageNoticesComponent } from './admin/manage-notices/manage-notices.component';
 import { NoticeComponent } from './notice/notice.component';
+import { FeedbackComponent } from './feedback/feedback.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   
   { path:'student', component:StudentLayoutComponent,
   children:[
-    { path: '', redirectTo: 'student-dashboard', pathMatch: 'full' },
+  { path: '', redirectTo: 'student-dashboard', pathMatch: 'full' },
   { path:'leave', component: LeaveComponent },
   { path:'student-dashboard', component: StudentDashboardComponent },
   { path:'complaint', component: ComplaintComponent },
   { path:'notice', component:NoticeComponent},
-   {path: 'login', component: LoginComponent } ]},
+  { path: 'login', component: LoginComponent },
+  { path: 'feedback', component: FeedbackComponent } 
+  ]},
    
   { path:'admins', component:AdminLayoutComponent,
   children:[

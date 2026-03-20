@@ -1,0 +1,16 @@
+.feedback-card {
+  border-radius: 15px;
+  background: linear-gradient(135deg, #ffffff, #f8f9fa);
+}
+
+.stars i {
+  font-size: 24px;
+  cursor: pointer;
+  margin-right: 5px;
+  color: #ccc;
+  transition: 0.3s;
+}
+
+.stars i:hover {
+  transform: scale(1.2);
+}

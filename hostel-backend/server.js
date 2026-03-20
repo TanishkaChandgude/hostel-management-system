@@ -7,7 +7,7 @@ const Notice = require("./models/notice");
 require("dotenv").config();
 
 const Student = require("./models/student");
-
+const Feedback = require('./models/feedback'); 
 const app = express();
 
 app.use(cors());
@@ -382,3 +382,60 @@ app.delete('/delete-notice/:id', async (req, res) => {
   }
 });
 app.use('/uploads', express.static('uploads'));
+
+// ✅ SUBMIT FEEDBACK
+app.post("/feedback", async (req, res) => {
+
+  const feedback = new Feedback(req.body);
+
+  await feedback.save();
+
+  res.json({ message: "Feedback Saved" });
+});
+
+
+// ✅ GET ALL FEEDBACK
+app.get("/feedback", async (req, res) => {
+
+  const data = await Feedback.find();
+
+  res.json(data);
+});
+
+
+// ✅ UPDATE STATUS
+app.put("/feedback-status", async (req, res) => {
+
+  const { id, status } = req.body;
+
+  await Feedback.findByIdAndUpdate(id, { status });
+
+  res.json({ message: "Updated" });
+});
+// ✅ FEEDBACK SAVE ROUTE
+app.post("/feedback", async (req, res) => {
+  try {
+    const feedback = new Feedback(req.body);
+    await feedback.save();
+
+    res.json({ message: "Feedback Saved" });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Error saving feedback" });
+  }
+});
+// ✅ FEEDBACK ROUTE (POST)
+app.post("/feedback", async (req, res) => {
+  try {
+    console.log("Incoming Data:", req.body); // debug
+
+    const feedback = new Feedback(req.body);
+    await feedback.save();
+
+    res.status(200).json({ message: "Feedback Saved" });
+
+  } catch (err) {
+    console.log("❌ Error:", err);
+    res.status(500).json({ error: "Failed to save feedback" });
+  }
+});
