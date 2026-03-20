@@ -1,28 +1,44 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-student-dashboard',
   templateUrl: './student-dashboard.component.html',
   styleUrls: ['./student-dashboard.component.css']
 })
-export class StudentDashboardComponent  implements OnInit{
+export class StudentDashboardComponent implements OnInit {
 
-dashboard:any = {};
+  dashboard: any = {};
+  searchText: string = '';
 
-constructor(private http:HttpClient){}
+  constructor(private http: HttpClient) {}
 
-ngOnInit(){
+  modules = [
+  { name: 'Leave', icon: 'fas fa-edit', route: '/student/leave' },
+  { name: 'Complaints', icon: 'fas fa-exclamation-circle', route: '/student/complaint' },
+  { name: 'Notices', icon: 'fas fa-bullhorn', route: '/student/notice' },
 
-const email = localStorage.getItem("email");
+  { name: 'Attendance', icon: 'fas fa-calendar-check', route: '/student/attendance' }, 
 
-this.http.get("http://localhost:5000/student-dashboard/"+email)
-.subscribe((data:any)=>{
+  { name: 'Room', icon: 'fas fa-bed', route: '/student/room' },
+  { name: 'Mess', icon: 'fas fa-utensils', route: '/student/mess' },
+  { name: 'Fees', icon: 'fas fa-money-bill', route: '/student/fees' },
 
-this.dashboard = data;
+  { name: 'Feedback', icon: 'fas fa-comment-dots', route: '/student/feedback' }
+];
 
-});
+  ngOnInit() {
+    const email = localStorage.getItem("email");
 
-}
+    this.http.get("http://localhost:5000/student-dashboard/" + email)
+      .subscribe((data: any) => {
+        this.dashboard = data;
+      });
+  }
 
+  filteredModules() {
+    return this.modules.filter(m =>
+      m.name.toLowerCase().includes(this.searchText.toLowerCase())
+    );
+  }
 }

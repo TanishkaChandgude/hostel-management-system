@@ -6,7 +6,7 @@
     <!-- Left: Logo -->
     <div class="d-flex align-items-center gap-2">
       <img src="assets/logovp.png" width="40" height="40">
-      <span class="fw-bold">VIDYAPRATISTHANS HOSTEL A </span>
+      <span class="fw-bold">VIDYA PRATISTHAN'S  Girls Hostel - A </span>
     </div>
 
     <!-- Right: Icons -->
@@ -29,12 +29,14 @@
       <i class="fas fa-expand"></i>
 
       <!-- Profile -->
-      <div class="profile-circle" (click)="toggleDropdown()">{{userInitial}}
-        <div class="dropdown" *ngIf="showDropdown">
-      <p class="name">{{ user }}</p>
-      <button (click)="logout()">Logout</button>
-    </div>
-      </div>
+<div class="profile-circle" (click)="toggleDropdown()">{{userInitial}}
+  <div class="dropdown" *ngIf="showDropdown">
+    <p class="name">{{ user }}</p>
+    <button class="logout-btn" (click)="logout()">
+      <i class="fas fa-sign-out-alt me-2"></i> Logout
+    </button>
+  </div>
+</div>
 
     </div>
   </div>
@@ -49,10 +51,10 @@
 
       <span class="badge bg-success">● Active</span>
 
-      <span>Registration No: {{users.rollNo}}</span>
+      <span><B>Registration No : {{users.rollNo}}</B></span>
 
-      <span>Branch : {{users.branch}}</span>
-      <span>Room NO :{{users.roomNo}}</span>
+      <span><b>Branch : {{users.branch}}</b></span>
+      <span><b>Room NO : {{users.roomNo}}</b></span>
     </div>
 
   </div>

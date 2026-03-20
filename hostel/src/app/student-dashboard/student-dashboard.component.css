@@ -151,3 +151,34 @@ body {
   transform: rotate(10deg) scale(1.1);
   transition: 0.3s;
 }
+/* 🔥 SIDEBAR FIX */
+.sidebar {
+  background: linear-gradient(180deg, #4e73df, #224abe);
+  min-height: 100vh;
+  border-radius: 0 20px 20px 0;
+  color: white;
+  padding: 20px 10px;
+}
+
+/* Sidebar list items */
+.sidebar .list-group-item {
+  border: none;
+  padding: 10px 8px;
+  font-size: 14px;
+  background: transparent;
+  color: white;
+}
+
+/* Hover effect */
+.sidebar .list-group-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+/* Text visibility */
+.sidebar h5,
+.sidebar h6,
+.sidebar p {
+  color: white;
+}

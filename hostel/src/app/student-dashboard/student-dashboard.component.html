@@ -1,87 +1,78 @@
-<!-- Search -->
-<div class="search-bar">
-  <input type="text" placeholder="Search Module" />
-</div>
+<div class="container-fluid">
+  <div class="row">
 
-<div class="dashboard">
+    <!-- 🔥 LEFT SIDEBAR -->
+    <div class="col-md-3 col-lg-2 sidebar p-3">
 
+      <h5 class="text-white mb-4">👤 My Info</h5>
 
+      <ul class="list-group list-group-flush">
 
-  <!-- Cards -->
-  <div class="cards">
+        <li class="list-group-item bg-transparent text-white d-flex justify-content-between">
+          <span><i class="fas fa-bed me-2"></i>Room</span>
+          <strong>{{dashboard.roomNo || 'A-203'}}</strong>
+        </li>
 
-    <div class="card" routerLink="/student/leave">
-      <div class="icon"><i class="fas fa-edit"></i></div>
-      <p>Leave</p>
+        <li class="list-group-item bg-transparent text-white d-flex justify-content-between">
+          <span><i class="fas fa-calendar me-2"></i>Leaves</span>
+          <strong>{{dashboard.leaves || 2}}</strong>
+        </li>
+
+        <li class="list-group-item bg-transparent text-white d-flex justify-content-between">
+          <span><i class="fas fa-bullhorn me-2"></i>Complaints</span>
+          <strong>{{dashboard.complaints || 1}}</strong>
+        </li>
+
+      </ul>
+
+      <hr class="bg-light">
+
+      <h6 class="text-white mt-3">🌿 Hostel Life</h6>
+      <p class="text-light small">
+        Safe and comfortable environment for students.
+      </p>
+
+      <h6 class="text-white mt-3">🛎️ Support</h6>
+      <p class="text-light small">
+        Raise complaints anytime and track them easily.
+      </p>
+
     </div>
 
+    <!-- 🎯 RIGHT CONTENT -->
+    <div class="col-md-9 col-lg-10 p-4">
 
+      <!-- 🔍 Search -->
+      <div class="mb-3">
+        <input type="text" class="form-control w-25"
+               placeholder="🔍 Search Module..."
+               [(ngModel)]="searchText">
+      </div>
 
+      <!-- Cards -->
+      <div class="row g-4">
 
-  <div class="card" routerLink="/student/complaint">
-    <div class="icon"><i class="fas fa-book"></i></div>
-    <p>Complaints</p>
-  </div>
+        <div class="col-xl-3 col-lg-4 col-md-6"
+             *ngFor="let module of filteredModules()">
 
-  <div class="card" routerLink="/student/notice">
-    <div class="icon"><i class="fas fa-calculator"></i></div>
-    <p>Notices</p>
-  </div>
+          <!-- ✅ FIX HERE -->
+          <div class="card text-center p-3 shadow-sm module-card"
+               [routerLink]="module.route"
+               style="cursor: pointer;">
 
-  <div class="card">
-    <div class="icon"><i class="fas fa-file-alt"></i></div>
-    <p>Admission</p>
-  </div>
+            <div class="icon mb-2">
+              <i [class]="module.icon"></i>
+            </div>
 
-  <div class="card">
-    <div class="icon"><i class="fas fa-certificate"></i></div>
-    <p>Certificates</p>
-  </div>
+            <h6>{{module.name}}</h6>
 
-  <div class="card">
-    <div class="icon"><i class="fas fa-laptop"></i></div>
-    <p>Examination</p>
-  </div>
+          </div>
 
-  <div class="card">
-    <div class="icon"><i class="fas fa-comment-dots"></i></div>
-    <p>Feedback</p>
-  </div>
+        </div>
 
-  <div class="card">
-    <div class="icon"><i class="fas fa-award"></i></div>
-    <p>NBA</p>
-  </div>
+      </div>
 
-  <div class="card">
-    <div class="icon"><i class="fas fa-clipboard"></i></div>
-    <p>Registration</p>
-  </div>
-
-  <div class="card">
-    <div class="icon"><i class="fas fa-share-alt"></i></div>
-    <p>Resource Sharing</p>
-  </div>
-
-  <div class="card">
-    <div class="icon"><i class="fas fa-clock"></i></div>
-    <p>TimeTable</p>
-  </div>
-
-
-  </div>
-
-  <!-- Side Panel -->
-  <div class="side-panel">
-    <div class="panel-box">
-      <h3>Vision</h3>
-      <p>To achieve excellence in field of computer engineering.</p>
     </div>
 
-    <div class="panel-box">
-      <h3>Mission</h3>
-      <p>To develop students with advanced tools.</p>
-    </div>
   </div>
-
 </div>

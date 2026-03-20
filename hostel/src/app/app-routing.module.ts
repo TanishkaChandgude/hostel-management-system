@@ -25,15 +25,16 @@ const routes: Routes = [
   { path:'complaint', component: ComplaintComponent },
   { path:'notice', component:NoticeComponent},
    {path: 'login', component: LoginComponent } ]},
+   
   { path:'admins', component:AdminLayoutComponent,
   children:[
-     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+    { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     {path:'dashboard',component:AdminDashboardComponent},
     {path:'students',component:ManageStudentsComponent},
     {path:'complaints',component:ManageComplaintsComponent},
     {path:'leaves',component:ManageLeavesComponent},
     {path:'notices',component:ManageNoticesComponent},
-    { path: 'register', component: RegisterComponent },
+    {path:'register',component: RegisterComponent },
     {path: 'login', component: LoginComponent }
 
   ]
