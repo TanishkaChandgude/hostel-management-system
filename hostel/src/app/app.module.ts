@@ -23,6 +23,7 @@ import { ChatbotComponent } from './chatbot/chatbot.component';
 import { HeaderComponent } from './header/header.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { ManageFeedbackComponent } from './manage-feedback/manage-feedback.component';
+import { StaffComponent } from './staff/staff.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { ManageFeedbackComponent } from './manage-feedback/manage-feedback.compo
     ChatbotComponent,
     HeaderComponent,
     FeedbackComponent,
-    ManageFeedbackComponent
+    ManageFeedbackComponent,
+    StaffComponent
   ],
   imports: [
     BrowserModule,

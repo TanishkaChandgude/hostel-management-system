@@ -1,0 +1,40 @@
+.staff-card {
+  border-radius: 15px;
+  transition: 0.3s;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+.staff-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 25px rgba(0,0,0,0.15);
+}
+
+/* Avatar Circle */
+.avatar {
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(135deg, #007bff, #00c6ff);
+  color: white;
+  font-size: 28px;
+  font-weight: bold;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+
+/* Email link */
+.email-link {
+  text-decoration: none;
+  color: #007bff;
+}
+
+.email-link:hover {
+  text-decoration: underline;
+}
+
+/* Button hover */
+.btn:hover {
+  transform: scale(1.05);
+}

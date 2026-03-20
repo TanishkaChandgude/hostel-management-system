@@ -20,7 +20,7 @@ export class StudentDashboardComponent implements OnInit {
 
   { name: 'Attendance', icon: 'fas fa-calendar-check', route: '/student/attendance' }, 
 
-  { name: 'Room', icon: 'fas fa-bed', route: '/student/room' },
+  { name: 'Staff Directory', icon: 'fas fa-users', route: '/student/staff' },
   { name: 'Mess', icon: 'fas fa-utensils', route: '/student/mess' },
   { name: 'Fees', icon: 'fas fa-money-bill', route: '/student/fees' },
 

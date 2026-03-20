@@ -14,6 +14,7 @@ import { ManageLeavesComponent } from './admin/manage-leaves/manage-leaves.compo
 import { ManageNoticesComponent } from './admin/manage-notices/manage-notices.component';
 import { NoticeComponent } from './notice/notice.component';
 import { FeedbackComponent } from './feedback/feedback.component';
+import { StaffComponent } from './staff/staff.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -26,7 +27,8 @@ const routes: Routes = [
   { path:'complaint', component: ComplaintComponent },
   { path:'notice', component:NoticeComponent},
   { path: 'login', component: LoginComponent },
-  { path: 'feedback', component: FeedbackComponent } 
+  { path: 'feedback', component: FeedbackComponent },
+  { path: 'staff', component: StaffComponent } 
   ]},
    
   { path:'admins', component:AdminLayoutComponent,
