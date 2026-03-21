@@ -5,3 +5,28 @@
 h5 {
   color: #3f51b5;
 }
+/* Breadcrumb */
+.breadcrumb {
+  max-width: 900px;
+  margin: 15px auto;
+  font-size: 14px;
+  color: #555;
+}
+
+.breadcrumb .home {
+  cursor: pointer;
+  color: #4a90e2;
+  font-weight: 500;
+}
+
+.breadcrumb .home:hover {
+  text-decoration: underline;
+}
+
+.separator {
+  margin: 0 5px;
+}
+
+.current {
+  color: #888;
+}

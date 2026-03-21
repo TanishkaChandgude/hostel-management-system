@@ -66,7 +66,7 @@ this.getLeaves();
 
 getLeaves(){
 
-const email = localStorage.getItem("email");
+const email = sessionStorage.getItem("email");
 
 this.http.get("http://localhost:5050/my-leaves/"+email)
 .subscribe((data:any)=>{

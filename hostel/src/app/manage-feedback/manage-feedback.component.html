@@ -1,31 +1,53 @@
+
+<div class="breadcrumb">
+  <span class="home" routerLink="/admins/dashboard">
+    <i class="fas fa-home"></i> Home
+  </span>
+  <span class="separator">/</span>
+  <span class="current">Feedbacks</span>
+</div>
 <div class="container mt-4">
 
-  <h4 class="mb-3">📋 Feedback Management</h4>
+  <div class="card shadow-sm">
+    <div class="card-body">
 
-  <table class="table table-bordered table-striped">
+      <h4 class="mb-4">📋 Feedback Management</h4>
 
-    <tr>
-      <th>Email</th>
-      <th>Category</th>
-      <th>Rating</th>
-      <th>Message</th>
-      <th>Status</th>
-    </tr>
+      <div class="table-responsive">
+        <table class="table table-hover align-middle">
 
-    <tr *ngFor="let f of feedbacks">
-      <td>{{f.email}}</td>
-      <td>{{f.category}}</td>
-      <td>⭐ {{f.rating}}</td>
-      <td>{{f.message}}</td>
+          <thead class="table-dark">
+            <tr>
+              <th>Email</th>
+              <th>Category</th>
+              <th>Rating</th>
+              <th>Message</th>
+              <th>Status</th>
+            </tr>
+          </thead>
 
-      <td>
-        <select [(ngModel)]="f.status" (change)="updateStatus(f)">
-          <option>Pending</option>
-          <option>Resolved</option>
-        </select>
-      </td>
-    </tr>
+          <tbody>
+            <tr *ngFor="let f of feedbacks">
+              <td>{{ f.email }}</td>
+              <td>{{ f.category }}</td>
+              <td>⭐ {{ f.rating }}</td>
+              <td>{{ f.message }}</td>
 
-  </table>
+              <td>
+                <select class="form-select form-select-sm"
+                        [(ngModel)]="f.status"
+                        (change)="updateStatus(f)">
+                  <option value="Pending">Pending</option>
+                  <option value="Resolved">Resolved</option>
+                </select>
+              </td>
+            </tr>
+          </tbody>
+
+        </table>
+      </div>
+
+    </div>
+  </div>
 
 </div>

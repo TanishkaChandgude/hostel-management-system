@@ -1,0 +1,91 @@
+
+
+<div class="breadcrumb">
+  <span class="home" routerLink="/admins/dashboard">
+    <i class="fas fa-home"></i> Home
+  </span>
+  <span class="separator">/</span>
+  <span class="current">View Avaliable Rooms</span>
+</div>
+<div class="container">
+
+  <h2 class="title">🏠 Room Management</h2>
+
+  <!-- 🔥 Stats -->
+  <div class="stats">
+    <div class="card total">
+      <p>Total Rooms</p>
+      <h3>{{stats.totalRooms}}</h3>
+    </div>
+
+    <div class="card full">
+      <p>Full Rooms</p>
+      <h3>{{stats.fullRooms}}</h3>
+    </div>
+
+    <div class="card available">
+      <p>Available Rooms</p>
+      <h3>{{stats.availableRooms}}</h3>
+    </div>
+
+    <div class="card vacancy">
+      <p>Rooms with Vacancy</p>
+      <h3>{{stats.roomsWithVacancy}}</h3>
+    </div>
+  </div>
+
+  <!-- 🔍 SEARCH + FILTER -->
+ <div class="controls">
+
+  <div class="search-box">
+    <i class="fas fa-search"></i>
+    <input type="text"
+           placeholder="Search Room..."
+           [(ngModel)]="searchText"
+           (input)="applyFilters()">
+  </div>
+
+  <select [(ngModel)]="selectedFilter"
+          (change)="applyFilters()">
+    <option value="all">All Rooms</option>
+    <option value="full">Full</option>
+    <option value="partial">Partial</option>
+    <option value="empty">Empty</option>
+  </select>
+
+</div>
+
+  <!-- 📋 TABLE -->
+  <div class="table-box">
+
+    <table>
+
+      <tr>
+        <th>Room No</th>
+        <th>Capacity</th>
+        <th>Occupied</th>
+        <th>Available</th>
+        <th>Status</th>
+      </tr>
+
+      <tr *ngFor="let room of filteredRooms">
+
+        <td>{{room.roomNo}}</td>
+        <td>{{room.capacity}}</td>
+        <td>{{room.occupants}}</td>
+        <td>{{room.available}}</td>
+
+        <td>
+          <span class="status"
+                [ngClass]="getStatus(room)">
+            {{ getStatus(room) | uppercase }}
+          </span>
+        </td>
+
+      </tr>
+
+    </table>
+
+  </div>
+
+</div>

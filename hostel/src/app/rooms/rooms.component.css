@@ -1,0 +1,176 @@
+/* 🔥 Stats Cards (NEW) */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.card {
+  background: white;
+  padding: 15px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+.card h3 {
+  margin-top: 5px;
+}
+
+/* Colors */
+.total { border-left: 5px solid #3498db; }
+.full { border-left: 5px solid #e74c3c; }
+.available { border-left: 5px solid #2ecc71; }
+.vacancy { border-left: 5px solid #f39c12; }
+
+/* 🔥 Table */
+.table-box {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  background: #3498db;
+  color: white;
+  padding: 12px;
+  text-align: left;
+}
+
+td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+tr:hover {
+  background: #f9f9f9;
+}
+
+/* 🔥 Status */
+.status {
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  color: white;
+}
+
+.status.full {
+  background: #e74c3c;
+}
+
+.status.partial {
+  background: #f39c12;
+}
+
+.status.empty {
+  background: #2ecc71;
+}
+
+/* 🔍 Controls Container */
+.controls {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+/* 🔎 Search Input */
+.controls input {
+  flex: 1;
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: 1px solid #dcdfe6;
+  font-size: 14px;
+  background: #fff;
+  transition: border 0.2s ease;
+}
+
+/* Subtle focus */
+.controls input:focus {
+  border-color: #409eff;
+}
+
+/* 🎯 Dropdown */
+.controls select {
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid #dcdfe6;
+  background: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: border 0.2s ease;
+}
+
+/* Hover + focus */
+.controls select:hover,
+.controls select:focus {
+  border-color: #409eff;
+}
+
+/* Optional: same height alignment */
+.controls input,
+.controls select {
+  height: 38px;
+}
+/* 🔍 Search Box Wrapper */
+.search-box {
+  position: relative;
+  flex: 1;
+}
+
+/* 🔎 Icon INSIDE input */
+.search-box i {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+  color: #888;
+  font-size: 14px;
+  pointer-events: none;
+}
+
+/* Input */
+.search-box input {
+  width: 100%;
+  padding: 10px 12px 10px 35px; /* 👈 space for icon */
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+/* Focus */
+.search-box input:focus {
+  border-color: #3498db;
+}
+/* Breadcrumb */
+.breadcrumb {
+  max-width: 900px;
+  margin: 15px auto;
+  font-size: 14px;
+  color: #555;
+}
+
+.breadcrumb .home {
+  cursor: pointer;
+  color: #4a90e2;
+  font-weight: 500;
+}
+
+.breadcrumb .home:hover {
+  text-decoration: underline;
+}
+
+.separator {
+  margin: 0 5px;
+}
+
+.current {
+  color: #888;
+}

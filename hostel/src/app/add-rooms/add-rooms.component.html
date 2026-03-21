@@ -1,0 +1,38 @@
+
+<div class="breadcrumb">
+  <span class="home" routerLink="/admins/dashboard">
+    <i class="fas fa-home"></i> Home
+  </span>
+  <span class="separator">/</span>
+  <span class="current">Add Rooms</span>
+</div>
+
+<div class="container">
+
+  <h2 class="title">🏗️ Create Rooms</h2>
+
+  <div class="form-box">
+
+    <input type="text"
+           placeholder="Block (A, B, C...)"
+           [(ngModel)]="form.block">
+
+    <input type="number"
+           placeholder="Number of Floors"
+           [(ngModel)]="form.floors">
+
+    <input type="number"
+           placeholder="Rooms per Floor"
+           [(ngModel)]="form.roomsPerFloor">
+
+    <input type="number"
+           placeholder="Capacity per Room"
+           [(ngModel)]="form.capacity">
+
+    <button (click)="generateRooms()">
+      🚀 Generate Rooms
+    </button>
+
+  </div>
+
+</div>

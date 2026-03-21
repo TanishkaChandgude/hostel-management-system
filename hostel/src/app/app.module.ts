@@ -26,6 +26,10 @@ import { ManageFeedbackComponent } from './manage-feedback/manage-feedback.compo
 import { StaffComponent } from './staff/staff.component';
 import { MessComponent } from './mess/mess.component';
 import { AdminMessComponent } from './admin/mess/mess.component';
+import { RoomsComponent } from './rooms/rooms.component';
+import { AddRoomsComponent } from './add-rooms/add-rooms.component';
+import { AddStaffComponent } from './add-staff/add-staff.component';
+import { StudentsComponent } from './students/students.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +53,11 @@ import { AdminMessComponent } from './admin/mess/mess.component';
     ManageFeedbackComponent,
     StaffComponent,
     MessComponent,
-    AdminMessComponent
+    AdminMessComponent,
+    RoomsComponent,
+    AddRoomsComponent,
+    AddStaffComponent,
+    StudentsComponent
   ],
   imports: [
     BrowserModule,

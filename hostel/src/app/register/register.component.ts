@@ -14,21 +14,22 @@ export class RegisterComponent  {
     password:"",
     branch:"",
     rollNo:"",
-    roomNo:"",
-    year:"",
-    role:"student"
+    year:""
   };
 
   constructor(private http:HttpClient){}
 
   register(){
 
-    this.http.post("http://localhost:5050/register",this.user)
+    this.http.post("http://localhost:5050/register", this.user)
     .subscribe((res:any)=>{
 
-      alert("Registration Successful");
+      alert("Registered Successfully 🎉\nRoom Assigned: " + res.roomAssigned);
 
-    });
+    }, (err) => {
+    console.log("LOGIN ERROR:", err); // 🔥 DEBUG
+    alert("Student already exists");
+  });
 
   }
 

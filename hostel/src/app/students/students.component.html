@@ -1,0 +1,81 @@
+<div class="breadcrumb">
+  <span class="home" routerLink="/admins/dashboard">
+    <i class="fas fa-home"></i> Home
+  </span>
+  <span class="separator">/</span>
+  <span class="current">Students</span>
+</div>
+<div class="container mt-4">
+
+  <h3 class="mb-4">👨‍🎓 Student Room Management</h3>
+
+  <!-- 🧮 Block-wise Summary Cards -->
+  <div class="row mb-4">
+
+    <div class="col-md-3" *ngFor="let block of blockCounts | keyvalue">
+
+      <div class="card text-center p-3 block-card">
+
+        <h5>Block {{ block.key }}</h5>
+        <h3>{{ block.value }}</h3>
+        <p>Students</p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- 🔍 Search -->
+  <div class="search-box mb-3">
+    <input type="text"
+           class="form-control"
+           placeholder="🔍 Search by name, email or room..."
+           [(ngModel)]="searchText"
+           (input)="searchStudents()">
+  </div>
+
+  <!-- 📋 Table -->
+  <table class="table table-bordered table-hover">
+
+    <thead class="table-dark">
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Block</th>
+        <th>Room No</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let student of filteredStudents">
+
+        <td>{{ student.name }}</td>
+        <td>{{ student.email }}</td>
+
+        <!-- Block -->
+        <td>{{ student.block || 'N/A' }}</td>
+
+        <!-- Room -->
+        <td>
+          <input type="text"
+                 class="form-control"
+                 [(ngModel)]="student.roomNo"
+                 placeholder="Enter Room No">
+        </td>
+
+        <!-- Update -->
+        <td>
+          <button class="btn btn-primary btn-sm"
+                  (click)="updateRoom(student)">
+            Update
+          </button>
+        </td>
+
+      </tr>
+    </tbody>
+
+  </table>
+
+</div>

@@ -12,7 +12,7 @@ export class StudentDashboardComponent implements OnInit {
   searchText: string = '';
 
   constructor(private http: HttpClient) {}
-
+users= JSON.parse(sessionStorage.getItem("user") || "{}");
   modules = [
   { name: 'Leave', icon: 'fas fa-edit', route: '/student/leave' },
   { name: 'Complaints', icon: 'fas fa-exclamation-circle', route: '/student/complaint' },
@@ -28,7 +28,7 @@ export class StudentDashboardComponent implements OnInit {
 ];
 
  ngOnInit() {
-  const email = localStorage.getItem("email");
+  const email = this.users.email;
 
   this.http.get("http://localhost:5050/student-dashboard/" + email)
     .subscribe((data: any) => {

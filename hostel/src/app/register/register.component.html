@@ -1,3 +1,11 @@
+
+<div class="breadcrumb">
+  <span class="home" routerLink="/admins/dashboard">
+    <i class="fas fa-home"></i> Home
+  </span>
+  <span class="separator">/</span>
+  <span class="current">Register New Student</span>
+</div>
 <div class="register-page">
 
   <div class="register-container">
@@ -31,10 +39,7 @@
           [(ngModel)]="user.rollNo" name="rollNo" required>
       </div>
 
-      <div class="form-group">
-        <input type="text" placeholder="Allocated Room No"
-          [(ngModel)]="user.roomNo" name="roomNo" required>
-      </div>
+     
 
       <div class="form-group">
         <select [(ngModel)]="user.year" name="year" required>
@@ -44,6 +49,11 @@
           <option value="3">3rd Year</option>
           <option value="4">4th Year</option>
         </select>
+      </div>
+       <div class="form-group">
+       <p class="note">
+  🏠 Room will be automatically assigned after registration
+</p>
       </div>
 
       <button type="submit">Register</button>

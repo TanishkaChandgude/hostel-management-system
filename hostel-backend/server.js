@@ -1,6 +1,8 @@
 console.log("🔥 SERVER FILE RUNNING");
 
 const jwt = require("jsonwebtoken");
+const Notification = require('./models/notification');
+const Staff = require('./models/staff');
 const express = require("express");
 const mongoose = require("mongoose");
 const Leave = require("./models/leave");
@@ -9,11 +11,13 @@ const Notice = require("./models/notice");
 require("dotenv").config();
 
 const Student = require("./models/student");
+const Room = require("./models/room");
 const Feedback = require('./models/feedback'); 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+
 
 mongoose.connect(process.env.MONGO_URI)
 .then(()=> console.log("MongoDB Connected"))
@@ -59,12 +63,11 @@ app.post("/register", async (req, res) => {
       password,
       branch,
       rollNo,
-      roomNo,
       year
     } = req.body;
 
-    // ✅ validation
-    if (!name || !email || !password || !branch || !rollNo || !roomNo || !year) {
+    // ✅ validation (removed roomNo)
+    if (!name || !email || !password || !branch || !rollNo || !year) {
       return res.status(400).json({ error: "All fields are required" });
     }
 
@@ -77,21 +80,43 @@ app.post("/register", async (req, res) => {
     // 🔒 hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    // 🔍 find available room
+    const rooms = await Room.find();
+
+    let assignedRoom = null;
+
+    for (let room of rooms) {
+
+      const count = await Student.countDocuments({ roomNo: room.roomNo });
+
+      if (count < room.capacity) {
+        assignedRoom = room.roomNo;
+        break;
+      }
+    }
+
+    // ❌ if no room available
+    if (!assignedRoom) {
+      return res.status(400).json({ error: "No rooms available" });
+    }
+
     // 💾 save student
     const student = new Student({
       name,
       email,
-      password: hashedPassword, // store here instead
+      password: hashedPassword,
       branch,
       rollNo,
-      roomNo,
       year,
-      
+      roomNo: assignedRoom   // ✅ auto assigned
     });
 
     await student.save();
 
-    res.json({ message: "Student registered successfully" });
+    res.json({
+      message: "Student registered successfully",
+      roomAssigned: assignedRoom   // 🔥 send to frontend
+    });
 
   } catch (err) {
     console.log(err);
@@ -257,42 +282,78 @@ res.status(500).json({error:"Server error"});
 });
 
 
-app.put("/approve-leave/:id", async (req,res)=>{
+app.put("/approve-leave/:id", async (req, res) => {
 
-await Leave.findByIdAndUpdate(
-req.params.id,
-{status:"Approved"}
-);
+  const leave = await Leave.findByIdAndUpdate(
+    req.params.id,
+    { status: "Approved" },
+    { new: true }
+  );
 
-res.json({message:"Leave Approved"});
+  // 🔥 Create Notification using email
+  await Notification.create({
+    studentEmail: leave.studentEmail,
+    message: "Your leave request has been approved ✅"
+  });
 
+  res.json({ message: "Leave Approved" });
 });
 
 
-app.put("/reject-leave/:id", async (req,res)=>{
+app.put("/reject-leave/:id", async (req, res) => {
 
-await Leave.findByIdAndUpdate(
-req.params.id,
-{status:"Rejected"}
-);
+  const leave = await Leave.findByIdAndUpdate(
+    req.params.id,
+    { status: "Rejected" },
+    { new: true }
+  );
 
-res.json({message:"Leave Rejected"});
+  await Notification.create({
+    studentEmail: leave.studentEmail,
+    message: "Your leave request has been rejected ❌"
+  });
 
+  res.json({ message: "Leave Rejected" });
 });
 
+
+app.get("/notifications/:email", async (req, res) => {
+
+  const notifications = await Notification.find({
+    studentEmail: req.params.email
+  }).sort({ createdAt: -1 });
+
+  res.json(notifications);
+});
+
+app.put('/notifications/read-all/:email', async (req, res) => {
+  try {
+    const email = req.params.email;
+
+    await Notification.updateMany(
+      { studentEmail: email, isRead: false },
+      { $set: { isRead: true } }
+    );
+
+    res.json({ message: "All notifications marked as read" });
+
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Server error" });
+  }
+});
 
 app.get('/student-dashboard/:email', async (req, res) => {
   try {
     const email = req.params.email;
 
-    console.log("📩 Email received:", email);
-
+   
     // ✅ FIXED: case-insensitive email match
     const student = await Student.findOne({
       email: new RegExp(`^${email}$`, 'i')
     });
 
-    console.log("👤 Student Found:", student);
+   
 
     // ✅ FIXED: correct field names
     const leaves = await Leave.countDocuments({
@@ -476,5 +537,206 @@ app.get('/mess', async (req, res) => {
     res.json(menu);
   } catch (err) {
     res.status(500).json({ error: "Error fetching menu" });
+  }
+});
+
+
+
+app.get("/room-stats", async (req, res) => {
+  try {
+
+    const rooms = await Room.find();      // ✅ get all rooms
+    const students = await Student.find();
+
+    let fullRooms = 0;
+    let availableRooms = 0;
+    let roomsWithVacancy = 0;
+
+    const roomDetails = [];
+
+    rooms.forEach(room => {
+
+      // count students in this room
+      const count = students.filter(s => s.roomNo === room.roomNo).length;
+
+      if (count === room.capacity) {
+        fullRooms++;
+      } else {
+        roomsWithVacancy++;
+      }
+
+      if (count < room.capacity) {
+        availableRooms++;
+      }
+
+      roomDetails.push({
+        roomNo: room.roomNo,
+        occupants: count,
+        capacity: room.capacity,
+        available: room.capacity - count
+      });
+
+    });
+
+    res.json({
+      totalRooms: rooms.length,   // ✅ correct total
+      fullRooms,
+      availableRooms,
+      roomsWithVacancy,
+      roomDetails
+    });
+
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+
+app.put("/update-room/:id", async (req, res) => {
+  try {
+    await Student.findByIdAndUpdate(req.params.id, {
+      roomNo: req.body.roomNo
+    });
+
+    res.json({ message: "Room updated successfully" });
+
+  } catch (err) {
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+
+app.post("/generate-rooms", async (req, res) => {
+  try {
+
+    const { block, floors, roomsPerFloor, capacity } = req.body;
+
+    let rooms = [];
+
+    for (let f = 1; f <= floors; f++) {
+      for (let r = 1; r <= roomsPerFloor; r++) {
+
+        const roomNo = `${block}${f}${r.toString().padStart(2, '0')}`;
+
+        // prevent duplicates
+        const exists = await Room.findOne({ roomNo });
+
+        if (!exists) {
+          rooms.push({
+            roomNo,
+            capacity: capacity || 4,
+            block,
+            floor: f
+          });
+        }
+      }
+    }
+
+    await Room.insertMany(rooms);
+
+    res.json({ message: "Rooms generated successfully" });
+
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Error generating rooms" });
+  }
+});
+
+
+app.post("/staff", async (req, res) => {
+  try {
+    const staff = new Staff(req.body);
+    await staff.save();
+    res.json(staff);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+
+
+app.get("/staff", async (req, res) => {
+  try {
+    const staff = await Staff.find();
+    res.json(staff);
+  } catch (err) {
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+
+
+
+app.put("/students/:id/room", async (req, res) => {
+  try {
+    const { roomNo } = req.body;
+
+    // 1. Get room details
+    const room = await Room.findOne({ roomNo });
+
+    if (!room) {
+      return res.status(404).json({ error: "Room not found" });
+    }
+
+    // 2. Count students already in that room
+    const count = await Student.countDocuments({ roomNo });
+
+    // 3. Check capacity
+    if (count >= room.capacity) {
+      return res.status(400).json({ error: "Room is already full ❌" });
+    }
+
+    // 4. Update student
+    const updatedStudent = await Student.findByIdAndUpdate(
+      req.params.id,
+      { roomNo },
+      { new: true }
+    );
+
+    res.json(updatedStudent);
+
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+app.get("/students", async (req, res) => {
+  console.log("✅ /students API HIT"); 
+
+  try {
+    const students = await Student.find();
+    const rooms = await Room.find();
+
+    console.log("STUDENTS:", students.map(s => s.roomNo));
+    console.log("ROOMS:", rooms.map(r => r.roomNo));
+
+    const roomMap = {};
+
+    rooms.forEach(room => {
+      if (room.roomNo) {
+        const key = room.roomNo.trim().toLowerCase();
+        roomMap[key] = room.block;
+      }
+    });
+
+    const updatedStudents = students.map(student => {
+      const key = student.roomNo
+        ? student.roomNo.trim().toLowerCase()
+        : '';
+
+      return {
+        ...student._doc,
+        block: roomMap[key] || "Unknown"
+      };
+    });
+
+    res.json(updatedStudents);
+
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Server error" });
   }
 });

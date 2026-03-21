@@ -1,23 +1,35 @@
+/* Body */
 body {
   margin: 0;
+  padding-top: 70px; /* 🔥 prevents content going under header */
   font-family: Arial, sans-serif;
   background: #f4f6f9;
 }
 
-/* Header */
+/* 🔥 Header (FIXED - FINAL FIX) */
 .top-header {
   background: #e9ecef;
   display: flex;
   justify-content: space-between;
   padding: 10px 20px;
   align-items: center;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
+/* Icons */
 .icons span {
   margin: 0 10px;
   cursor: pointer;
 }
 
+/* Profile */
 .profile {
   background: #2c3e50;
   color: white;
@@ -67,42 +79,6 @@ body {
   flex: 3;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
-
-.card {
-  background: linear-gradient(to bottom, #a3b8d8, #dfe6f1);
-  height: 120px;
-  border-radius: 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.card:hover {
-  transform: scale(1.05);
-}
-
-/* Side Panel */
-.side-panel {
-  flex: 1;
-  margin-left: 20px;
-}
-
-.panel-box {
-  background: white;
-  padding: 15px;
-  border-radius: 10px;
-  margin-bottom: 15px;
-}
-
-.cards {
-  flex: 3;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
   gap: 25px;
 }
 
@@ -119,7 +95,7 @@ body {
   box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
-/* Icon Circle */
+/* Icon */
 .icon {
   width: 70px;
   height: 70px;
@@ -140,14 +116,57 @@ body {
   margin-top: 10px;
 }
 
-/* 🔥 Hover Animation */
+/* Hover */
 .card:hover {
   transform: translateY(-10px) scale(1.03);
   box-shadow: 0 15px 25px rgba(0,0,0,0.2);
 }
 
-/* Icon animation */
 .card:hover .icon {
   transform: rotate(10deg) scale(1.1);
   transition: 0.3s;
+}
+
+/* Side Panel */
+.side-panel {
+  flex: 1;
+  margin-left: 20px;
+}
+
+.panel-box {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+/* Sidebar */
+.sidebar {
+  background: linear-gradient(180deg, #4e73df, #224abe);
+  min-height: 100vh;
+  border-radius: 0 20px 20px 0;
+  color: white;
+  padding: 20px 10px;
+}
+
+/* Sidebar Items */
+.sidebar .list-group-item {
+  border: none;
+  padding: 10px 8px;
+  font-size: 14px;
+  background: transparent;
+  color: white;
+}
+
+.sidebar .list-group-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+/* Sidebar Text */
+.sidebar h5,
+.sidebar h6,
+.sidebar p {
+  color: white;
 }
