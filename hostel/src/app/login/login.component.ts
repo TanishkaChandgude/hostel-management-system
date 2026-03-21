@@ -24,11 +24,11 @@ export class LoginComponent {
   this.auth.login(data).subscribe((res: any) => {
 
     console.log("LOGIN RESPONSE:", res); // 🔥 DEBUG
-     sessionStorage.setItem("user", JSON.stringify(res.user));
-    sessionStorage.setItem("name",res.user.name);
-    sessionStorage.setItem("token", res.token);
-    sessionStorage.setItem("email", res.user.email);
-    sessionStorage.setItem("role", res.user.role);
+     localStorage.setItem("user", JSON.stringify(res.user));
+    localStorage.setItem("name",res.user.name);
+    localStorage.setItem("token", res.token);
+    localStorage.setItem("email", res.user.email);
+    localStorage.setItem("role", res.user.role);
 
     if(res.user.role === "admin"){
       this.router.navigate(['/admins']);

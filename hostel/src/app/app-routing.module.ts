@@ -22,6 +22,8 @@ import { AddRoomsComponent } from './add-rooms/add-rooms.component';
 import { AddStaffComponent } from './add-staff/add-staff.component';
 import { StudentsComponent } from './students/students.component';
 import { ManageFeedbackComponent } from './manage-feedback/manage-feedback.component';
+import { StudentChatbotComponent } from './student-chatbot/student-chatbot.component';
+import { AdminChatbotComponent } from './admin/admin-chatbot/admin-chatbot.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -37,6 +39,7 @@ const routes: Routes = [
   { path: 'feedback', component: FeedbackComponent },
   { path: 'staff', component: StaffComponent }, 
   { path: 'mess', component: MessComponent},
+  { path: 'student-chatbot', component: StudentChatbotComponent}
 
   ]},
    
@@ -55,7 +58,8 @@ const routes: Routes = [
     {path :'rooms',component:RoomsComponent},
     {path :'addrooms',component:AddRoomsComponent},
      {path :'addstaff',component:AddStaffComponent},
-     {path :'view',component:StudentsComponent}
+     {path :'view',component:StudentsComponent},
+     {path: 'admin-chatbot',component:AdminChatbotComponent}
 
   ]
 }

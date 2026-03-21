@@ -1,0 +1,33 @@
+<div class="chat-icon" (click)="toggleChat()">💬</div>
+
+<div class="chatbot-container" *ngIf="isOpen">
+
+  <div class="chat-header">
+    Student Assistant 🤖
+  </div>
+
+  <div class="chat-body" #chatBox>
+
+    <div *ngFor="let msg of messages"
+         [ngClass]="msg.sender === 'user' ? 'user-msg' : 'bot-msg'">
+      {{msg.text}}
+    </div>
+
+    <div *ngIf="botTyping" class="bot-msg">Typing...</div>
+
+  </div>
+
+  <!-- 🔥 QUICK BUTTONS -->
+  <div class="quick-buttons">
+    <button (click)="sendMessage('room')">🏠 Room</button>
+    <button (click)="sendMessage('leave')">📅 Leaves</button>
+    <button (click)="sendMessage('complaint')">🛠 Complaints</button>
+    <button (click)="sendMessage('mess')">🍽 Mess</button>
+  </div>
+
+  <div class="chat-input">
+    <input [(ngModel)]="userInput" placeholder="Ask something..." />
+    <button (click)="sendMessage()">Send</button>
+  </div>
+
+</div>

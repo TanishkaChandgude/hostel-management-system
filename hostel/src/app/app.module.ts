@@ -19,7 +19,6 @@ import { RouterModule } from '@angular/router';
 import { ManageNoticesComponent } from './admin/manage-notices/manage-notices.component';
 import { NoticeComponent } from './notice/notice.component';
 import { CommonModule } from '@angular/common';
-import { ChatbotComponent } from './chatbot/chatbot.component';
 import { HeaderComponent } from './header/header.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { ManageFeedbackComponent } from './manage-feedback/manage-feedback.component';
@@ -30,6 +29,8 @@ import { RoomsComponent } from './rooms/rooms.component';
 import { AddRoomsComponent } from './add-rooms/add-rooms.component';
 import { AddStaffComponent } from './add-staff/add-staff.component';
 import { StudentsComponent } from './students/students.component';
+import { StudentChatbotComponent } from './student-chatbot/student-chatbot.component';
+import { AdminChatbotComponent } from './admin/admin-chatbot/admin-chatbot.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,6 @@ import { StudentsComponent } from './students/students.component';
     ManageLeavesComponent,
     ManageNoticesComponent,
     NoticeComponent,
-    ChatbotComponent,
     HeaderComponent,
     FeedbackComponent,
     ManageFeedbackComponent,
@@ -57,7 +57,9 @@ import { StudentsComponent } from './students/students.component';
     RoomsComponent,
     AddRoomsComponent,
     AddStaffComponent,
-    StudentsComponent
+    StudentsComponent,
+    StudentChatbotComponent,
+    AdminChatbotComponent
   ],
   imports: [
     BrowserModule,

@@ -13,7 +13,7 @@ stats:any = {};
   searchText: string = '';
 
   constructor(private http: HttpClient) {}
-users= JSON.parse(sessionStorage.getItem("user") || "{}");
+users= JSON.parse(localStorage.getItem("user") || "{}");
   modules = [
   { name: 'Leave', icon: 'fas fa-edit', route: '/admins/leaves' },
   { name: 'Complaints', icon: 'fas fa-exclamation-circle', route: '/admins/complaints' },

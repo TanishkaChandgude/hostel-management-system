@@ -740,3 +740,82 @@ app.get("/students", async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 });
+
+app.post('/chatbot', async (req, res) => {
+
+  console.log("FULL BODY:", req.body);
+
+  const { message, email, role } = req.body;
+  const msg = message.toLowerCase().trim();
+
+  console.log("Message:", message);
+console.log("Email:", email);
+console.log("Role:", role);
+
+  try {
+
+    // 👨‍🎓 STUDENT
+    if(role === 'student'){
+
+      if(message === "room"){
+        const student = await Student.findOne({ email });
+        return res.json({ reply: `Your room is ${student?.roomNo}` });
+      }
+
+      if(message === "leave"){
+        const count = await Leave.countDocuments({ studentEmail: email });
+        return res.json({ reply: `You applied ${count} leaves` });
+      }
+
+      if(message === "complaint"){
+        const count = await Complaint.countDocuments({ email });
+        return res.json({ reply: `You have ${count} complaints` });
+      }
+
+      if(msg === "mess"){
+        const menu = await Mess.find();
+
+  if(menu.length === 0){
+    reply = "Mess menu is not available yet 🍽️";
+  } else {
+
+    reply = "📅 Weekly Mess Menu:\n\n";
+
+    menu.forEach(item => {
+      reply += `👉 ${item.day}\n`;
+      reply += `Breakfast: ${item.breakfast}\n`;
+      reply += `Lunch: ${item.lunch}\n`;
+      reply += `Dinner: ${item.dinner}\n\n`;
+    });
+
+  }
+  res.json({ reply });
+
+      }
+    }
+
+    // 👨‍💼 ADMIN
+    if(role === 'admin'){
+
+      if(message === "complaints"){
+        const total = await Complaint.countDocuments();
+        return res.json({ reply: `Total complaints: ${total}` });
+      }
+
+      if(message === "leaves"){
+        const total = await Leave.countDocuments();
+        return res.json({ reply: `Total leaves: ${total}` });
+      }
+
+      if(message === "students"){
+        const total = await Student.countDocuments();
+        return res.json({ reply: `Total students: ${total}` });
+      }
+    }
+
+    res.json({ reply: "🤖 I couldn't find data. Try: room, leave, complaint or mess." });
+
+  } catch(err){
+    res.status(500).json({ reply: "Server error" });
+  }
+});

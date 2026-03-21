@@ -25,8 +25,8 @@ ngOnInit(){
 
 applyLeave(){
 
-const email = sessionStorage.getItem("email");
-const user=sessionStorage.getItem("name");
+const email = localStorage.getItem("email");
+const user=localStorage.getItem("name");
 const from = new Date(this.leave.fromDate);
 const to = new Date(this.leave.toDate);
 const today = new Date();
@@ -66,7 +66,7 @@ this.getLeaves();
 
 getLeaves(){
 
-const email = sessionStorage.getItem("email");
+const email = localStorage.getItem("email");
 
 this.http.get("http://localhost:5050/my-leaves/"+email)
 .subscribe((data:any)=>{
