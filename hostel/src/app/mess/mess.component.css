@@ -30,3 +30,17 @@ h5 {
 .current {
   color: #888;
 }
+
+.breadcrumb {
+  font-size: 14px;
+  margin: 10px 0;
+}
+
+.breadcrumb .home {
+  color: #007bff;
+  font-weight: 500;
+}
+
+.breadcrumb .home:hover {
+  text-decoration: underline;
+}

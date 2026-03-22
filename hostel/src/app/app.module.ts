@@ -31,6 +31,12 @@ import { AddStaffComponent } from './add-staff/add-staff.component';
 import { StudentsComponent } from './students/students.component';
 import { StudentChatbotComponent } from './student-chatbot/student-chatbot.component';
 import { AdminChatbotComponent } from './admin/admin-chatbot/admin-chatbot.component';
+import { MessLayoutComponent } from './mess/mess-layout/mess-layout.component';
+import { MessDashboardComponent } from './mess/mess-dashboard/mess-dashboard.component';
+import { MessFeedbackComponent } from './mess/mess-feedback/mess-feedback.component';
+import { MessComplaintsComponent } from './mess/mess-complaints/mess-complaints.component';
+import { MessStaffComponent } from './mess/mess-staff/mess-staff.component';
+import { MessNoticesComponent } from './mess/mess-notices/mess-notices.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +65,13 @@ import { AdminChatbotComponent } from './admin/admin-chatbot/admin-chatbot.compo
     AddStaffComponent,
     StudentsComponent,
     StudentChatbotComponent,
-    AdminChatbotComponent
+    AdminChatbotComponent,
+    MessLayoutComponent,
+    MessDashboardComponent,
+    MessFeedbackComponent,
+    MessComplaintsComponent,
+    MessStaffComponent,
+    MessNoticesComponent
   ],
   imports: [
     BrowserModule,

@@ -22,7 +22,6 @@ users= JSON.parse(localStorage.getItem("user") || "{}");
   { name: 'View Avaliable rooms', icon: 'fas fa-door-open', route: '/admins/rooms' }, 
 
   { name: 'Add Staff Directory', icon: 'fas fa-users', route: '/admins/addstaff' },
-  { name: 'Mess', icon: 'fas fa-utensils', route: '/admins/mess' },
   { name: 'Add rooms', icon: 'fas fa-plus', route: '/admins/addrooms' },
   
  { name: 'Register New student', icon: 'fas fa-user-plus', route: '/admins/register' },

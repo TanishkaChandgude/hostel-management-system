@@ -23,7 +23,7 @@ mongoose.connect(process.env.MONGO_URI)
 .then(()=> console.log("MongoDB Connected"))
 .catch(err => console.log(err));
 
-app.post('admin/mess', (req, res) => {
+app.post('/admin/mess', (req, res) => {
   console.log("🔥 MESS HIT");
   res.send("Working");
 });
@@ -63,8 +63,35 @@ app.post("/register", async (req, res) => {
       password,
       branch,
       rollNo,
-      year
+      year,
+      role
     } = req.body;
+
+    // 🍽️ MESS USER REGISTER
+if(role === "mess"){
+
+  if(!name || !email || !password){
+    return res.status(400).json({ error: "Name, email, password required" });
+  }
+
+  const existing = await User.findOne({ email });
+  if(existing){
+    return res.status(400).json({ error: "User already exists" });
+  }
+
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  const user = new User({
+    name,
+    email,
+    password: hashedPassword,
+    role: "mess"
+  });
+
+  await user.save();
+
+  return res.json({ message: "Mess user created" });
+}
 
     // ✅ validation (removed roomNo)
     if (!name || !email || !password || !branch || !rollNo || !year) {
@@ -128,18 +155,17 @@ app.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    // First check if student
     let user = await Student.findOne({ email });
     let type = "student";
 
     if (!user) {
-      // If not student, check admin
       user = await User.findOne({ email });
-      type = "admin";
-    }
 
-    if (!user) {
-      return res.status(400).json({ message: "User not found" });
+      if (!user) {
+        return res.status(400).json({ message: "User not found" });
+      }
+
+      type = user.role;   // ✅ FIXED (admin / mess)
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
@@ -147,11 +173,10 @@ app.post("/login", async (req, res) => {
       return res.status(400).json({ message: "Invalid credentials" });
     }
 
-    // Create JWT (optional, can use for auth)
     const token = jwt.sign({ id: user._id, role: type }, "secretkey");
 
-    // Send user data according to type
     let userData;
+
     if (type === "student") {
       userData = {
         name: user.name,
@@ -166,20 +191,21 @@ app.post("/login", async (req, res) => {
       userData = {
         name: user.name,
         email: user.email,
-        role: "admin"
+        role: type   // ✅ admin OR mess
       };
     }
 
     res.json({
       message: "Login successful",
-      token: token,
+      token,
       user: userData
     });
+
   } catch (err) {
-    console.log(err);
     res.status(500).json({ error: "Server error" });
   }
 });
+
 const Complaint = require('./models/Complaint');
 
 app.post('/add-complaint', async(req,res)=>{
@@ -818,4 +844,57 @@ console.log("Role:", role);
   } catch(err){
     res.status(500).json({ reply: "Server error" });
   }
+});
+
+app.get('/mess-dashboard', async (req, res) => {
+  try {
+
+    const totalComplaints = await Complaint.countDocuments({ type: "mess" });
+    const pendingComplaints = await Complaint.countDocuments({ type: "mess", status: "Pending" });
+
+    const totalFeedback = await Feedback.countDocuments();
+
+    res.json({
+      totalComplaints,
+      pendingComplaints,
+      totalFeedback
+    });
+
+  } catch (err) {
+    res.status(500).json({ error: "Error" });
+  }
+});
+
+app.post('/feedback', async (req,res)=>{
+  const fb = new Feedback(req.body);
+  await fb.save();
+  res.json({message:"Feedback added"});
+});
+
+app.get('/mess-complaints', async (req, res) => {
+  const data = await Complaint.find({ type: 'mess' });
+  res.json(data);
+});
+
+app.get('/complaints', async (req, res) => {
+  const data = await Complaint.find({ type: 'hostel' });
+  res.json(data);
+});
+
+app.get('/create-mess-user', async (req, res) => {
+
+  const bcrypt = require('bcryptjs');
+
+  const hashed = await bcrypt.hash("123456", 10);
+
+  const user = new User({
+    name: "Mess Manager",
+    email: "mess@gmail.com",
+    password: hashed,
+    role: "mess"
+  });
+
+  await user.save();
+
+  res.send("Mess user created");
 });

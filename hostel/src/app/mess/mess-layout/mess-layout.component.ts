@@ -1,0 +1,35 @@
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+
+@Component({
+  selector: 'app-admin-layout',
+  templateUrl: './mess-layout.component.html',
+  styleUrls: ['./mess-layout.component.css']
+})
+export class MessLayoutComponent{
+user: string = '';
+userInitial: string = '';
+showDropdown: boolean = false;
+ constructor( private router:Router){}
+ngOnInit() {
+  this.user = localStorage.getItem("name") || '';
+
+  // ✅ Get first letter dynamically
+  if (this.user) {
+    this.userInitial = this.user.charAt(0).toUpperCase();
+  }
+}
+toggleDropdown() {
+  this.showDropdown = !this.showDropdown;
+}
+
+logout() {
+  localStorage.clear(); // or localStorage.clear()
+  this.router.navigate(['']);
+}
+
+goHome() {
+  this.router.navigate(['/mess/dashboard']);   // 👈 IMPORTANT
+}
+
+}

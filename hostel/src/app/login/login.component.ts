@@ -31,10 +31,15 @@ export class LoginComponent {
     localStorage.setItem("role", res.user.role);
 
     if(res.user.role === "admin"){
-      this.router.navigate(['/admins']);
-    } else {
-      this.router.navigate(['/student']);
-    }
+  this.router.navigate(['/admins']);
+} 
+else if(res.user.role === "mess"){
+  this.router.navigate(['/mess/dashboard']);
+}
+else {
+  this.router.navigate(['/student']);
+}
+
 
   }, (err) => {
     console.log("LOGIN ERROR:", err); // 🔥 DEBUG

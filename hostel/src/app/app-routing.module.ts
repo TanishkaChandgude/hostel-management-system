@@ -24,6 +24,12 @@ import { StudentsComponent } from './students/students.component';
 import { ManageFeedbackComponent } from './manage-feedback/manage-feedback.component';
 import { StudentChatbotComponent } from './student-chatbot/student-chatbot.component';
 import { AdminChatbotComponent } from './admin/admin-chatbot/admin-chatbot.component';
+import { MessLayoutComponent } from './mess/mess-layout/mess-layout.component';
+import { MessDashboardComponent } from './mess/mess-dashboard/mess-dashboard.component';
+import { MessComplaintsComponent } from './mess/mess-complaints/mess-complaints.component';
+import { MessFeedbackComponent } from './mess/mess-feedback/mess-feedback.component';
+import { MessStaffComponent } from './mess/mess-staff/mess-staff.component';
+import { MessNoticesComponent } from './mess/mess-notices/mess-notices.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -54,15 +60,28 @@ const routes: Routes = [
     {path:'notices',component:ManageNoticesComponent},
     {path:'register',component: RegisterComponent },
     {path: 'login', component: LoginComponent },
-    {path: 'mess', component: AdminMessComponent},
     {path :'rooms',component:RoomsComponent},
     {path :'addrooms',component:AddRoomsComponent},
      {path :'addstaff',component:AddStaffComponent},
      {path :'view',component:StudentsComponent},
      {path: 'admin-chatbot',component:AdminChatbotComponent}
 
+  ]},
+
+  {
+  path: 'mess',
+  component: MessLayoutComponent,   // 🔥 IMPORTANT
+  children: [
+    { path: '', redirectTo: 'dashboard', pathMatch: 'full'},
+    { path: 'dashboard', component: MessDashboardComponent },
+    { path: 'menu', component: AdminMessComponent },
+    { path: 'feedback', component: MessFeedbackComponent },
+    { path: 'complaints', component: MessComplaintsComponent },
+    { path: 'staff', component: MessStaffComponent },
+    { path: 'notices', component: MessNoticesComponent }
   ]
 }
+
 ];
 
 @NgModule({

@@ -8,6 +8,11 @@ const complaintSchema = new mongoose.Schema({
 
   description:String,
 
+  type:{                  // ✅ ADD THIS
+    type:String,
+    default:"hostel"
+  },
+
   status:{
     type:String,
     default:"Pending"
