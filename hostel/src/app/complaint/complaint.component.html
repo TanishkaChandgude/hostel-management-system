@@ -16,6 +16,20 @@
 <form (ngSubmit)="submitComplaint()">
 
 <div class="form-group">
+  <div class="form-group mb-3">
+  <label>Category</label>
+
+  <select 
+    [(ngModel)]="complaint.type" 
+    name="type" 
+    required>
+
+    <option value="" disabled selected>Select Category</option>
+    <option value="hostel">Hostel</option>
+    <option value="mess">Mess</option>
+
+  </select>
+</div>
 <label>Complaint Title</label>
 <input 
 type="text" 

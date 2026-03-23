@@ -4,7 +4,8 @@ const noticeSchema = new mongoose.Schema({
 
 title:String,
 description:String,
- fileUrl: String,
+fileUrl: String,
+
 date:{
 type:Date,
 default:Date.now

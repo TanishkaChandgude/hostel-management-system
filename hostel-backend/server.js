@@ -443,7 +443,7 @@ app.post('/notices', upload.single('file'), async (req, res) => {
 
     await newNotice.save();
 
-    res.json({ message: "Notice uploaded" });
+    res.json({ message: "✅ Notice added successfully." });
 
   } catch (err) {
     console.log("ERROR:", err); // 👈 IMPORTANT
@@ -566,7 +566,20 @@ app.get('/mess', async (req, res) => {
   }
 });
 
+app.get('/today-menu', async (req, res) => {
+  try {
 
+    const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+    const today = days[new Date().getDay()];
+
+    const menu = await Mess.findOne({ day: today });
+
+    res.json(menu);
+
+  } catch (err) {
+    res.status(500).json({ error: "Error fetching today's menu" });
+  }
+});
 
 app.get("/room-stats", async (req, res) => {
   try {

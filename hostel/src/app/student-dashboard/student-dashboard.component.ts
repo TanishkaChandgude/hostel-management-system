@@ -8,8 +8,23 @@ import { HttpClient } from '@angular/common/http';
 })
 export class StudentDashboardComponent implements OnInit {
 
+  menu: any = {};
+
   dashboard: any = {};
   searchText: string = '';
+
+  getTodayMenu() {
+  this.http.get("http://localhost:5050/today-menu")
+    .subscribe((data: any) => {
+
+      console.log("Student Menu:", data);
+
+      if (data) {
+        this.menu = data;
+      }
+
+    });
+}
 
   constructor(private http: HttpClient) {}
 users= JSON.parse(localStorage.getItem("user") || "{}");
@@ -32,9 +47,10 @@ users= JSON.parse(localStorage.getItem("user") || "{}");
 
   this.http.get("http://localhost:5050/student-dashboard/" + email)
     .subscribe((data: any) => {
-      console.log("Dashboard Data:", data); // 👈 ADD THIS
       this.dashboard = data;
     });
+
+  this.getTodayMenu(); // ✅ ADD THIS
 }
 
 

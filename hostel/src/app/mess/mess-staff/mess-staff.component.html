@@ -1,7 +1,87 @@
+
 <div class="breadcrumb">
-  <a class="home" routerLink="/mess/dashboard">
+  <span class="home" routerLink="/mess/dashboard">
     <i class="fas fa-home"></i> Home
-  </a>
-  <span class="separator"> / </span>
-  <span class="current">Staff</span>
+  </span>
+  <span class="separator">/</span>
+  <span class="current">Add Staff Directory</span>
+</div>
+<div class="container">
+
+  <h2>➕ Add Staff</h2>
+
+  <form (ngSubmit)="addStaff()">
+
+    <!-- Name -->
+    <div class="input-group">
+      <span class="input-group-text">
+        <i class="fas fa-user"></i>
+      </span>
+      <input type="text"
+             class="form-control"
+             placeholder="Name"
+             [(ngModel)]="staff.name"
+             name="name"
+             required>
+    </div>
+
+    <!-- Role Dropdown -->
+    <div class="input-group">
+      <span class="input-group-text">
+        <i class="fas fa-briefcase"></i>
+      </span>
+      <select class="form-control"
+              [(ngModel)]="staff.role"
+              name="role"
+              required>
+        <option value="" disabled selected>Select Role</option>
+        <option>Mess Staff</option>
+      </select>
+    </div>
+
+    <!-- Phone -->
+    <div class="input-group">
+      <span class="input-group-text">
+        <i class="fas fa-phone"></i>
+      </span>
+      <input type="text"
+             class="form-control"
+             placeholder="Phone"
+             [(ngModel)]="staff.phone"
+             name="phone"
+             required>
+    </div>
+
+    <!-- Email -->
+    <div class="input-group">
+      <span class="input-group-text">
+        <i class="fas fa-envelope"></i>
+      </span>
+      <input type="email"
+             class="form-control"
+             placeholder="Email"
+             [(ngModel)]="staff.email"
+             name="email"
+             required>
+    </div>
+
+    <!-- Department -->
+    <div class="input-group">
+      <span class="input-group-text">
+        <i class="fas fa-building"></i>
+      </span>
+      <input type="text"
+             class="form-control"
+             placeholder="Department"
+             [(ngModel)]="staff.department"
+             name="department">
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" class="btn-submit">
+      Add Staff
+    </button>
+
+  </form>
+
 </div>

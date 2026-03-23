@@ -5,3 +5,49 @@
   <span class="separator"> / </span>
   <span class="current">Feedback</span>
 </div>
+
+<div class="container mt-4">
+
+  <div class="card shadow-sm">
+    <div class="card-body">
+
+      <h4 class="mb-4">📋 Feedback Management</h4>
+
+      <div class="table-responsive">
+        <table class="table table-hover align-middle">
+
+          <thead class="table-dark">
+            <tr>
+              <th>Email</th>
+              <th>Category</th>
+              <th>Rating</th>
+              <th>Message</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let f of feedbacks">
+              <td>{{ f.email }}</td>
+              <td>{{ f.category }}</td>
+              <td>⭐ {{ f.rating }}</td>
+              <td>{{ f.message }}</td>
+
+              <td>
+                <select class="form-select form-select-sm"
+                        [(ngModel)]="f.status"
+                        (change)="updateStatus(f)">
+                  <option value="Pending">Pending</option>
+                  <option value="Resolved">Resolved</option>
+                </select>
+              </td>
+            </tr>
+          </tbody>
+
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+</div>

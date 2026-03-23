@@ -1,7 +1,64 @@
 <div class="breadcrumb">
-  <a class="home" routerLink="/mess/dashboard">
+  <span class="home" routerLink="/mess/dashboard">
     <i class="fas fa-home"></i> Home
-  </a>
-  <span class="separator"> / </span>
+  </span>
+  <span class="separator">/</span>
   <span class="current">Notices</span>
+</div>
+<div class="container">
+
+  <h2 class="heading">📢 Manage Notices</h2>
+
+  <!-- Add Notice Form -->
+  <div class="form-box">
+    
+    <input type="text"
+           [(ngModel)]="notice.title"
+           placeholder="Enter title">
+
+    <textarea
+      [(ngModel)]="notice.description"
+      placeholder="Enter description">
+    </textarea>
+
+    <input type="file" (change)="onFileSelect($event)">
+
+    <button (click)="addNotice()">➕ Add Notice</button>
+
+  </div>
+
+  <!-- Notices List -->
+  <div class="notice-list">
+
+    <div class="card" *ngFor="let notice of notices">
+
+      <h3>{{ notice.title }}</h3>
+      <p class="desc">{{ notice.description }}</p>
+
+      <!-- Date -->
+      <p class="date">🕒 {{ notice.date | date:'medium' }}</p>
+
+      <!-- File Preview -->
+      <div *ngIf="notice.fileUrl">
+
+        <img *ngIf="notice.fileUrl.endsWith('.jpg') || notice.fileUrl.endsWith('.png')"
+             [src]="'http://localhost:5000/uploads/' + notice.fileUrl"
+             class="preview-img">
+
+        <a [href]="'http://localhost:5000/uploads/' + notice.fileUrl"
+           target="_blank">
+           📄 View File
+        </a>
+
+      </div>
+
+      <button class="delete-btn"
+              (click)="deleteNotice(notice._id)">
+        ❌ Delete
+      </button>
+
+    </div>
+
+  </div>
+
 </div>

@@ -15,7 +15,7 @@ export class ManageFeedbackComponent implements OnInit {
   ngOnInit() {
     this.http.get("http://localhost:5050/feedback")
       .subscribe((data: any) => {
-        this.feedbacks = data;
+        this.feedbacks = data.filter((f: any) => f.category !== 'Mess');
       });
   }
 

@@ -1,27 +1,94 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-mess-dashboard',
   templateUrl: './mess-dashboard.component.html',
   styleUrls: ['./mess-dashboard.component.css']
 })
-export class MessDashboardComponent {
+export class MessDashboardComponent implements OnInit {
+
+  constructor(private http: HttpClient, private router: Router) {}
+
+  goToMenu() {
+  this.router.navigate(['/mess/menu']);
+}
+
+  ngOnInit(): void {
+  this.loadStats();
+  this.getTodayMenu(); // ✅ ADD THIS
+}
+
+  loadStats() {
+  this.getComplaints();
+  this.getFeedback();
+}
+
+getComplaints() {
+  this.http.get("http://localhost:5050/complaints")
+    .subscribe((data: any) => {
+
+      // ✅ FILTER ONLY MESS COMPLAINTS
+      const messComplaints = data.filter(
+        (c: any) => (c.type || '').toLowerCase() === 'mess'
+      );
+
+      // ✅ TOTAL
+      this.stats.totalComplaints = messComplaints.length;
+
+      // ✅ PENDING
+      this.stats.pendingComplaints = messComplaints.filter(
+        (c: any) => (c.status || '').toLowerCase() === 'pending'
+      ).length;
+
+    }, err => {
+      console.error("Complaint fetch error", err);
+    });
+}
+
+getFeedback() {
+  this.http.get("http://localhost:5050/feedback")
+    .subscribe((data: any) => {
+
+      // ✅ FILTER ONLY MESS FEEDBACK
+      const messFeedback = data.filter(
+        (f: any) => (f.category || '').toLowerCase() === 'mess'
+      );
+
+      this.stats.totalFeedback = messFeedback.length;
+
+    }, err => {
+      console.error("Feedback fetch error", err);
+    });
+}
 
   searchText = '';
 
   // 📊 Sidebar Data
   stats = {
-    totalComplaints: 8,
-    pendingComplaints: 3,
-    totalFeedback: 15
+    totalComplaints: 0,
+    pendingComplaints: 0,
+    totalFeedback: 0
   };
 
   // 🍛 Menu
-  menu = {
-    breakfast: 'Poha & Tea',
-    lunch: 'Rice & Dal',
-    dinner: 'Chapati & Sabji'
-  };
+  menu: any = {};
+
+  getTodayMenu() {
+  this.http.get("http://localhost:5050/today-menu")
+    .subscribe((data: any) => {
+
+      console.log("Today's Menu:", data); // debug
+
+      if (data) {
+        this.menu = data;
+      }
+
+    }, err => {
+      console.error("Menu fetch error", err);
+    });
+}
 
   // 🧩 Cards
   modules = [

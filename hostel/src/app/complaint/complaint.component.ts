@@ -10,22 +10,31 @@ export class ComplaintComponent {
 
 complaint = {
 title:'',
-description:''
+description:'',
+type: ''
 }
 
 submitComplaint(){
+
+  if(!this.complaint.type){
+    alert("⚠️ Please select category");
+    return;
+  }
 
 const email = localStorage.getItem("email");
 
 const data = {
   email:email,
   title:this.complaint.title,
-  description:this.complaint.description
+  description:this.complaint.description,
+  type: this.complaint.type
 }
 
 this.http.post("http://localhost:5050/add-complaint",data)
 .subscribe(res=>{
   alert("Complaint Submitted");
+
+  this.complaint = { title:'', description:'', type:'' };
 })
 
 }

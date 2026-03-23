@@ -17,8 +17,12 @@ export class ManageComplaintsComponent {
     this.http.get("http://localhost:5050/complaints")
     .subscribe((data:any)=>{
 
-      this.complaints = data;
+      console.log("ADMIN DATA:", data); // 🔍 DEBUG
 
+      // ✅ ONLY HOSTEL COMPLAINTS
+      this.complaints = data.filter(
+        (c: any) => c.type?.toLowerCase() === 'hostel'
+      );
     });
 
   }
