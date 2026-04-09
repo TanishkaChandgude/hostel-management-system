@@ -9,15 +9,14 @@ const Leave = require("./models/leave");
 const cors = require("cors");
 const Notice = require("./models/notice");
 require("dotenv").config();
-
 const Student = require("./models/student");
 const Room = require("./models/room");
 const Feedback = require('./models/feedback'); 
-const app = express();
+const Fees = require('./models/Fees'); 
 
+const app = express();
 app.use(cors());
 app.use(express.json());
-
 
 mongoose.connect(process.env.MONGO_URI)
 .then(()=> console.log("MongoDB Connected"))
@@ -185,7 +184,7 @@ app.post("/login", async (req, res) => {
         rollNo: user.rollNo,
         roomNo: user.roomNo,
         year: user.year,
-        role: "student"
+        
       };
     } else {
       userData = {
@@ -910,4 +909,102 @@ app.get('/create-mess-user', async (req, res) => {
   await user.save();
 
   res.send("Mess user created");
+});
+//Fees
+app.get("/fees/:email", async (req, res) => {
+  try {
+    console.log("📩 Fetching fees for:", req.params.email);
+
+    const student = await Fees.findOne({ email: req.params.email });
+
+    if (!student) {
+      return res.status(404).json({ message: "No fee record found" });
+    }
+
+    res.json(student);
+
+  } catch (err) {
+    console.log("ERROR:", err);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+app.post("/update-fees", async (req, res) => {
+  try {
+    console.log("BODY:", req.body);
+
+    const { email, hostelPaid, messPaid, hostelDue, messDue } = req.body;
+
+    const hostelTotal = 25000;
+    const messTotal = 28200;
+
+    // 🔥 Get existing record
+    let existing = await Fees.findOne({ email });
+
+    let oldHostelPaid = existing?.hostel?.paid || 0;
+    let oldMessPaid = existing?.mess?.paid || 0;
+
+    // ✅ Add new payment
+    const newHostelPaid = oldHostelPaid + Number(hostelPaid || 0);
+    const newMessPaid = oldMessPaid + Number(messPaid || 0);
+
+    // 🔥 Calculate pending
+    const hostelPending = hostelTotal - newHostelPaid;
+    const messPending = messTotal - newMessPaid;
+
+    const hostelStatus = hostelPending <= 0 ? "Paid" : "Pending";
+    const messStatus = messPending <= 0 ? "Paid" : "Pending";
+
+    const result = await Fees.updateOne(
+      { email },
+      {
+        $set: {
+          hostel: {
+            total: hostelTotal,
+            paid: newHostelPaid,
+            pending: hostelPending,
+            dueDate: hostelDue,
+            status: hostelStatus
+          },
+          mess: {
+            total: messTotal,
+            paid: newMessPaid,
+            pending: messPending,
+            dueDate: messDue,
+            status: messStatus
+          }
+        }
+      },
+      { upsert: true }
+    );
+
+    console.log("DB RESULT:", result);
+
+    res.json({ message: "Fees Updated Successfully" });
+
+  } catch (err) {
+    console.log("🔥 ERROR:", err.message);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
+
+
+
+app.get("/student/:rollNo", async (req, res) => {
+  try {
+    const student = await Student.findOne({ rollNo: req.params.rollNo });
+   console.log("PARAM:", req.params.rollNo);
+    if (!student) {
+      return res.status(404).json({ error: "Student not found" });
+    }
+
+    res.json({
+      name: student.name,
+      email: student.email
+    });
+
+  } catch (err) {
+    res.status(500).json({ error: "Server error" });
+  }
 });

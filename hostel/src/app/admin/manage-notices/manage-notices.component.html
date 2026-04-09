@@ -43,10 +43,10 @@
       <div *ngIf="notice.fileUrl">
 
         <img *ngIf="notice.fileUrl.endsWith('.jpg') || notice.fileUrl.endsWith('.png')"
-             [src]="'http://localhost:5000/uploads/' + notice.fileUrl"
+             [src]="'http://localhost:5050/uploads/' + notice.fileUrl"
              class="preview-img">
 
-        <a [href]="'http://localhost:5000/uploads/' + notice.fileUrl"
+        <a [href]="'http://localhost:5050/uploads/' + notice.fileUrl"
            target="_blank">
            📄 View File
         </a>

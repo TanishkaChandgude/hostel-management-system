@@ -12,7 +12,7 @@ userInitial: string = '';
 showDropdown: boolean = false;
  constructor( private router:Router){}
 ngOnInit() {
-  this.user = localStorage.getItem("name") || '';
+  this.user = sessionStorage.getItem("name") || '';
 
   // ✅ Get first letter dynamically
   if (this.user) {
@@ -24,7 +24,7 @@ toggleDropdown() {
 }
 
 logout() {
-  localStorage.clear(); // or localStorage.clear()
+  sessionStorage.clear(); // or sessionStorage.clear()
   this.router.navigate(['']);
 }
 

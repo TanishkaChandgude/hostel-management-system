@@ -27,18 +27,14 @@ export class StudentDashboardComponent implements OnInit {
 }
 
   constructor(private http: HttpClient) {}
-users= JSON.parse(localStorage.getItem("user") || "{}");
+users= JSON.parse(sessionStorage.getItem("user") || "{}");
   modules = [
   { name: 'Leave', icon: 'fas fa-edit', route: '/student/leave' },
   { name: 'Complaints', icon: 'fas fa-exclamation-circle', route: '/student/complaint' },
-  { name: 'Notices', icon: 'fas fa-bullhorn', route: '/student/notice' },
-
-  { name: 'Attendance', icon: 'fas fa-calendar-check', route: '/student/attendance' }, 
-
+  { name: 'Notices', icon: 'fas fa-bullhorn', route: '/student/notice' }, 
   { name: 'Staff Directory', icon: 'fas fa-users', route: '/student/staff' },
   { name: 'Mess', icon: 'fas fa-utensils', route: '/student/mess' },
   { name: 'Fees', icon: 'fas fa-money-bill', route: '/student/fees' },
-
   { name: 'Feedback', icon: 'fas fa-comment-dots', route: '/student/feedback' }
 ];
 

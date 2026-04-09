@@ -21,7 +21,7 @@ submitComplaint(){
     return;
   }
 
-const email = localStorage.getItem("email");
+const email = sessionStorage.getItem("email");
 
 const data = {
   email:email,

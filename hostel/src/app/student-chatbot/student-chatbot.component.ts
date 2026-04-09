@@ -15,7 +15,7 @@ export class StudentChatbotComponent {
   isOpen = false;
   botTyping = false;
 
-  studentName = localStorage.getItem("name") || "Student";
+  studentName = sessionStorage.getItem("name") || "Student";
 
   constructor(private http: HttpClient) {}
 
@@ -70,7 +70,7 @@ export class StudentChatbotComponent {
 
     // ✅ DYNAMIC (BACKEND)
     else if(["room","leave","complaint","mess"].includes(detected!)){
-      const email = localStorage.getItem("email");
+      const email = sessionStorage.getItem("email");
 
       this.http.post<any>('http://localhost:5050/chatbot', {
         message: detected,

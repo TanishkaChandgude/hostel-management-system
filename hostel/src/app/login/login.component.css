@@ -66,3 +66,12 @@
 .login-btn:hover{
   background:#5563d6;
 }
+.welcome-text{
+  font-size:20px;
+  color:#fff;
+  background:#667eea;
+  padding:8px 12px;
+  border-radius:8px;
+  margin-bottom:15px;
+  display:inline-block;
+}

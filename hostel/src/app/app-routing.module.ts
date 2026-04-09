@@ -30,6 +30,9 @@ import { MessComplaintsComponent } from './mess/mess-complaints/mess-complaints.
 import { MessFeedbackComponent } from './mess/mess-feedback/mess-feedback.component';
 import { MessStaffComponent } from './mess/mess-staff/mess-staff.component';
 import { MessNoticesComponent } from './mess/mess-notices/mess-notices.component';
+import { FeesComponent } from './fees/fees.component';
+import { CommonModule } from '@angular/common';
+import { ManageFeesComponent } from './manage-fees/manage-fees.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -45,13 +48,14 @@ const routes: Routes = [
   { path: 'feedback', component: FeedbackComponent },
   { path: 'staff', component: StaffComponent }, 
   { path: 'mess', component: MessComponent},
-  { path: 'student-chatbot', component: StudentChatbotComponent}
+  { path: 'student-chatbot', component: StudentChatbotComponent},
+  { path: 'fees', component: FeesComponent }
 
   ]},
    
   { path:'admins', component:AdminLayoutComponent,
   children:[
-    { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+    {path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     {path:'dashboard',component:AdminDashboardComponent},
     {path:'students',component:ManageStudentsComponent},
     {path:'complaints',component:ManageComplaintsComponent},
@@ -64,8 +68,9 @@ const routes: Routes = [
     {path :'addrooms',component:AddRoomsComponent},
      {path :'addstaff',component:AddStaffComponent},
      {path :'view',component:StudentsComponent},
-     {path: 'admin-chatbot',component:AdminChatbotComponent}
-
+     {path: 'admin-chatbot',component:AdminChatbotComponent},
+     { path: 'manage-fees', component: ManageFeesComponent }
+     
   ]},
 
   {

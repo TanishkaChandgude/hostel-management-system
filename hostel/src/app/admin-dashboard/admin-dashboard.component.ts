@@ -13,7 +13,7 @@ stats:any = {};
   searchText: string = '';
 
   constructor(private http: HttpClient) {}
-users= JSON.parse(localStorage.getItem("user") || "{}");
+users= JSON.parse(sessionStorage.getItem("user") || "{}");
   modules = [
   { name: 'Leave', icon: 'fas fa-edit', route: '/admins/leaves' },
   { name: 'Complaints', icon: 'fas fa-exclamation-circle', route: '/admins/complaints' },
@@ -26,11 +26,13 @@ users= JSON.parse(localStorage.getItem("user") || "{}");
   
  { name: 'Register New student', icon: 'fas fa-user-plus', route: '/admins/register' },
   { name: 'Feedback', icon: 'fas fa-comment-dots', route: '/admins/feedbacks' },
-  { name: 'Students', icon: 'fas fa-users', route: '/admins/view' }
+  { name: 'Students', icon: 'fas fa-users', route: '/admins/view' },
+ { name: 'Manage Fees', icon: 'fas fa-money-bill', route: '/admins/manage-fees' }
+  
 ];
 
  ngOnInit() {
-  const email = localStorage.getItem("email");
+  const email = sessionStorage.getItem("email");
 
   this.http.get("http://localhost:5050/student-dashboard/" + email)
     .subscribe((data: any) => {

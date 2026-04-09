@@ -15,7 +15,7 @@ export class FeedbackComponent {
     category: '',
     rating: 0,
     message: '',
-    email: localStorage.getItem("email")
+    email: sessionStorage.getItem("email")
   };
 
   constructor(private http: HttpClient) {}
@@ -39,7 +39,7 @@ export class FeedbackComponent {
           category: '',
           rating: 0,
           message: '',
-          email: localStorage.getItem("email")
+          email: sessionStorage.getItem("email")
         };
 
       },

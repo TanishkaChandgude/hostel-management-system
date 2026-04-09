@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class StudentLayoutComponent {
 
   user: string = '';
-  users = JSON.parse(localStorage.getItem("user") || "{}");
+  users = JSON.parse(sessionStorage.getItem("user") || "{}");
   userInitial: string = '';
 
   showDropdown: boolean = false;
@@ -21,12 +21,12 @@ export class StudentLayoutComponent {
   showNotificationDropdown: boolean = false;
 
   // ✅ safer email
-  userEmail: string = localStorage.getItem("email") || '';
+  userEmail: string = sessionStorage.getItem("email") || '';
 
   constructor(private router: Router, private http: HttpClient) {}
 
   ngOnInit() {
-    this.user = localStorage.getItem("name") || '';
+    this.user = sessionStorage.getItem("name") || '';
 
     if (this.user) {
       this.userInitial = this.user.charAt(0).toUpperCase();
@@ -44,7 +44,7 @@ export class StudentLayoutComponent {
   }
 
   logout() {
-    localStorage.clear();
+    sessionStorage.clear();
     this.router.navigate(['']);
   }
 

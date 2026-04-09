@@ -4,7 +4,7 @@
     <!-- 🔥 LEFT SIDEBAR -->
     <div class="col-md-3 col-lg-2 sidebar p-3">
 
-      <h5 class="text-white mb-4">👤 My Info</h5>
+      <h5 class="text-white mb-4">👤 Student</h5>
 
       <ul class="list-group list-group-flush">
 
@@ -29,11 +29,23 @@
 
       <h6 class="mt-3">🍛 Today's Menu</h6>
 
-<p class="small">
-  Breakfast: {{menu?.breakfast || 'Not set'}} <br>
-Lunch: {{menu?.lunch || 'Not set'}} <br>
-Dinner: {{menu?.dinner || 'Not set'}}
-</p>
+<div class="menu-box">
+  <div class="meal">
+    <span class="meal-title">🍳 Breakfast</span>
+    <p>{{menu?.breakfast || 'Not set'}}</p>
+  </div>
+
+  <div class="meal">
+    <span class="meal-title">🍛 Lunch</span>
+    <p>{{menu?.lunch || 'Not set'}}</p>
+  </div>
+
+  <div class="meal">
+    <span class="meal-title">🍽️ Dinner</span>
+    <p>{{menu?.dinner || 'Not set'}}</p>
+  </div>
+</div>
+ <hr class="bg-light">
 
       <h6 class="text-white mt-3">🌿 Hostel Life</h6>
       <p class="text-light small">

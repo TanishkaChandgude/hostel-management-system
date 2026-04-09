@@ -37,6 +37,7 @@ import { MessFeedbackComponent } from './mess/mess-feedback/mess-feedback.compon
 import { MessComplaintsComponent } from './mess/mess-complaints/mess-complaints.component';
 import { MessStaffComponent } from './mess/mess-staff/mess-staff.component';
 import { MessNoticesComponent } from './mess/mess-notices/mess-notices.component';
+import { ManageFeesComponent } from './manage-fees/manage-fees.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import { MessNoticesComponent } from './mess/mess-notices/mess-notices.component
     MessFeedbackComponent,
     MessComplaintsComponent,
     MessStaffComponent,
-    MessNoticesComponent
+    MessNoticesComponent,
+    ManageFeesComponent
   ],
   imports: [
     BrowserModule,

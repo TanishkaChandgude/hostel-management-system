@@ -1,0 +1,49 @@
+<div class="container mt-4">
+
+  <h4 class="mb-4 fw-bold">💰 My Fees</h4>
+
+  <div class="row g-4">
+
+    <!-- 🏠 Hostel Fees -->
+    <div class="col-md-6">
+      <div class="card fee-card p-3">
+
+        <h5>🏠 Hostel Fees</h5>
+
+        <p>Total: ₹{{fees.hostel?.total || 25000}}</p>
+        <p>Paid: ₹{{fees.hostel?.paid || 25000}}</p>
+        <p>Pending: ₹{{fees.hostel?.pending || 0}}</p>
+
+        <!-- ✅ FIXED BADGE -->
+        <span class="badge"
+              [class.bg-success]="(fees.hostel?.pending || 0) === 0"
+              [class.bg-danger]="(fees.hostel?.pending || 0) !== 0">
+          {{ getStatus(fees.hostel?.pending || 0) }}
+        </span>
+
+      </div>
+    </div>
+
+    <!-- 🍽 Mess Fees -->
+    <div class="col-md-6">
+      <div class="card fee-card p-3">
+
+        <h5>🍽 Mess Fees</h5>
+
+        <p>Total: ₹{{fees.mess?.total || 28200}}</p>
+        <p>Paid: ₹{{fees.mess?.paid || 14100}}</p>
+        <p>Pending: ₹{{fees.mess?.pending || 14100}}</p>
+
+        <!-- ✅ FIXED BADGE -->
+        <span class="badge"
+              [class.bg-success]="(fees.mess?.pending || 14100) === 0"
+              [class.bg-danger]="(fees.mess?.pending || 14100) !== 0">
+          {{ getStatus(fees.mess?.pending || 14100) }}
+        </span>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>
