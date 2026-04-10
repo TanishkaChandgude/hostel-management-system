@@ -12,54 +12,124 @@
 
     <h2>🎓 Create Student Account</h2>
 
-    <form (ngSubmit)="register()">
+   <form #registerForm="ngForm" (ngSubmit)="register()" novalidate>
 
-      <div class="form-group">
-        <input type="text" placeholder="Full Name"
-          [(ngModel)]="user.name" name="name" required>
-      </div>
-
-      <div class="form-group">
-        <input type="email" placeholder="Email"
-          [(ngModel)]="user.email" name="email" required>
-      </div>
-
-      <div class="form-group">
-        <input type="password" placeholder="Password"
-          [(ngModel)]="user.password" name="password" required>
-      </div>
-
-      <div class="form-group">
-        <input type="text" placeholder="Branch (e.g. CSE, IT)"
-          [(ngModel)]="user.branch" name="branch" required>
-      </div>
-
-      <div class="form-group">
-        <input type="text" placeholder="Roll Number"
-          [(ngModel)]="user.rollNo" name="rollNo" required>
-      </div>
-
-     
-
-      <div class="form-group">
-        <select [(ngModel)]="user.year" name="year" required>
-          <option value="" disabled selected>Select Year of Study</option>
-          <option value="1">1st Year</option>
-          <option value="2">2nd Year</option>
-          <option value="3">3rd Year</option>
-          <option value="4">4th Year</option>
-        </select>
-      </div>
-       <div class="form-group">
-       <p class="note">
-  🏠 Room will be automatically assigned after registration
-</p>
-      </div>
-
-      <button type="submit">Register</button>
-
-    </form>
-
+  <!-- NAME -->
+  <div class="form-group">
+    <input 
+      type="text"
+      placeholder="Full Name"
+      [(ngModel)]="user.name"
+      name="name"
+      #name="ngModel"
+      required
+    >
+    <div class="error" *ngIf="name.invalid && name.touched">
+      Name is required
+    </div>
   </div>
 
+  <!-- EMAIL -->
+  <div class="form-group">
+    <input 
+      type="email"
+      placeholder="Email"
+      [(ngModel)]="user.email"
+      name="email"
+      #email="ngModel"
+      required
+      email
+    >
+    <div class="error" *ngIf="email.invalid && email.touched">
+      Enter valid email
+    </div>
+  </div>
+
+  <!-- PASSWORD -->
+  <div class="form-group">
+    <input 
+      type="password"
+      placeholder="Password"
+      [(ngModel)]="user.password"
+      name="password"
+      #password="ngModel"
+      required
+      minlength="6"
+    >
+    <div class="error" *ngIf="password.invalid && password.touched">
+      Password must be at least 6 characters
+    </div>
+  </div>
+
+  <!-- BRANCH -->
+  <div class="form-group">
+    <div class="form-group">
+  <select 
+    [(ngModel)]="user.branch"
+    name="branch"
+    #branch="ngModel"
+    required
+  >
+    <option value="" disabled selected>Select Branch</option>
+    <option value="CSE">Computer Science (CSE)</option>
+    <option value="IT">Information Technology (IT)</option>
+    <option value="ECE">Electronics (ECE)</option>
+    <option value="EEE">Electrical (EEE)</option>
+    <option value="ME">Mechanical (ME)</option>
+    <option value="CE">Civil (CE)</option>
+  </select>
+
+  <div class="error" *ngIf="branch.invalid && branch.touched">
+    Please select branch
+  </div>
 </div>
+  </div>
+
+  <!-- ENROLLMENT NUMBER -->
+  <div class="form-group">
+    <input 
+      type="text"
+      placeholder="Enrollment No (EN25201005)"
+      [(ngModel)]="user.rollNo"
+      name="rollNo"
+      #rollNo="ngModel"
+      required
+      pattern="^EN[0-9]{8}$"
+    >
+
+    <div class="error" *ngIf="rollNo.invalid && rollNo.touched">
+      Format must be like EN25201005
+    </div>
+  </div>
+
+  <!-- YEAR -->
+  <div class="form-group">
+    <select 
+      [(ngModel)]="user.year"
+      name="year"
+      #year="ngModel"
+      required
+    >
+      <option value="" disabled>Select Year of Study</option>
+      <option value="1">1st Year</option>
+      <option value="2">2nd Year</option>
+      <option value="3">3rd Year</option>
+      <option value="4">4th Year</option>
+    </select>
+
+    <div class="error" *ngIf="year.invalid && year.touched">
+      Please select year
+    </div>
+  </div>
+
+  <div class="form-group">
+    <p class="note">
+      🏠 Room will be automatically assigned after registration
+    </p>
+  </div>
+
+  <button type="submit" [disabled]="registerForm.invalid">
+    Register
+  </button>
+
+</form>

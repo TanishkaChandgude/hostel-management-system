@@ -2,32 +2,65 @@
 
 <div class="chatbot-container" *ngIf="isOpen">
 
+  <!-- HEADER -->
   <div class="chat-header">
     Student Assistant 🤖
   </div>
 
+  <!-- CHAT BODY -->
   <div class="chat-body" #chatBox>
 
+    <!-- MESSAGES -->
     <div *ngFor="let msg of messages"
-         [ngClass]="msg.sender === 'user' ? 'user-msg' : 'bot-msg'">
-      {{msg.text}}
+         class="message-row"
+         [ngClass]="msg.sender === 'user' ? 'user-row' : 'bot-row'">
+
+      <!-- BOT AVATAR -->
+      <div *ngIf="msg.sender === 'bot'" class="bot-avatar">
+        🤖
+      </div>
+
+      <!-- MESSAGE TEXT -->
+      <div class="message"
+           [ngClass]="msg.sender === 'user' ? 'user-msg' : 'bot-msg'">
+        {{msg.text}}
+      </div>
+
     </div>
 
-    <div *ngIf="botTyping" class="bot-msg">Typing...</div>
+    <!-- TYPING INDICATOR -->
+    <div *ngIf="botTyping" class="message-row bot-row">
+      <div class="bot-avatar">🤖</div>
+
+      <div class="message bot-msg typing">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
 
   </div>
 
-  <!-- 🔥 QUICK BUTTONS -->
-  <div class="quick-buttons">
+  <!-- QUICK BUTTONS -->
+  <div class="quick-buttons" *ngIf="messages.length === 0">
     <button (click)="sendMessage('room')">🏠 Room</button>
     <button (click)="sendMessage('leave')">📅 Leaves</button>
-    <button (click)="sendMessage('complaint')">🛠 Complaints</button>
+    <button (click)="sendMessage('complaint')">🛠 Complaint</button>
+    <button (click)="sendMessage('fees')">💰 Fees</button>
     <button (click)="sendMessage('mess')">🍽 Mess</button>
   </div>
 
+  <!-- INPUT -->
   <div class="chat-input">
-    <input [(ngModel)]="userInput" placeholder="Ask something..." />
-    <button (click)="sendMessage()">Send</button>
+    <input
+      [(ngModel)]="userInput"
+      placeholder="Ask something..."
+      (keyup.enter)="sendMessage()"
+    />
+
+    <button (click)="sendMessage()">
+      ➤
+    </button>
   </div>
 
 </div>

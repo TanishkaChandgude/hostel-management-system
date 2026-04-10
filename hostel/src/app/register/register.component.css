@@ -166,3 +166,8 @@ button:active {
 .current {
   color: #888;
 }
+.error {
+  color: #ff4d4d;
+  font-size: 12px;
+  margin-top: 4px;
+}

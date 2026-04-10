@@ -73,7 +73,7 @@ if(role === "mess"){
     return res.status(400).json({ error: "Name, email, password required" });
   }
 
-  const existing = await User.findOne({ email });
+  const existing = await User.findOne({ email , rollNo });
   if(existing){
     return res.status(400).json({ error: "User already exists" });
   }
@@ -1006,5 +1006,139 @@ app.get("/student/:rollNo", async (req, res) => {
 
   } catch (err) {
     res.status(500).json({ error: "Server error" });
+  }
+});
+
+
+
+const axios = require('axios');
+
+const cache = {}; // 🔥 response cache
+
+app.post('/chat', async (req, res) => {
+  const { message } = req.body;
+
+  if (!message) {
+    return res.json({ reply: "Please type a message" });
+  }
+
+  const msg = message.toLowerCase().trim();
+
+  // =========================
+  // HYBRID RULE BASED RESPONSE
+  // =========================
+
+  if (msg.includes("room")) {
+    return res.json({
+      reply: "Go to Dashboard → Profile section → Room Number"
+    });
+  }
+
+  if (msg.includes("fees")) {
+    return res.json({
+      reply: "Go to Dashboard → Fees section → Pay Fees"
+    });
+  }
+
+  if (msg.includes("leave")) {
+    return res.json({
+      reply: "Go to Dashboard → Leave section → Apply Leave"
+    });
+  }
+
+  if (msg.includes("complaint") || msg.includes("issue")) {
+    return res.json({
+      reply: "Go to Dashboard → Complaint section → New Complaint"
+    });
+  }
+
+  if (msg.includes("mess") || msg.includes("food")) {
+    return res.json({
+      reply: "Go to Dashboard → Mess section → View Menu"
+    });
+  }
+
+  // =========================
+  // CACHE (SAVE API CALLS)
+  // =========================
+
+  if (cache[msg]) {
+    return res.json({ reply: cache[msg] });
+  }
+
+  try {
+
+    const prompt = `
+You are a hostel management chatbot.
+
+You ONLY guide users where to find options in system.
+
+Examples:
+Leave → Dashboard → Leave → Apply
+Complaint → Dashboard → Complaint → New
+Fees → Dashboard → Fees
+Room → Dashboard → Profile
+
+User: ${message}
+`;
+
+    const response = await axios.post(
+      "https://generativelanguage.googleapis.com/v1beta/models/gemma-3n-e4b-it:generateContent",
+      {
+        contents: [
+          {
+            role: "user",
+            parts: [{ text: prompt }]
+          }
+        ]
+      },
+      {
+        params: {
+          key: "AIzaSyAXqhRNAVhgV6PaEuWfXBbA98-4wNF9N5A"
+        }
+      }
+    );
+
+    const reply =
+      response.data?.candidates?.[0]?.content?.parts?.[0]?.text;
+
+    cache[msg] = reply; // 🔥 save cache
+
+    res.json({
+      reply: reply || "No response from AI"
+    });
+
+  } catch (error) {
+
+    console.error("AI ERROR:", error.response?.data || error.message);
+
+    res.json({
+      reply: "AI limit reached. Please use dashboard navigation."
+    });
+  }
+});
+
+
+
+
+// CHECK ENROLLMENT NUMBER EXISTS
+app.get("/check-enrollment/:rollNo", async (req, res) => {
+  try {
+    // convert to uppercase + trim
+    const rollNo = req.params.rollNo.trim().toUpperCase();
+
+    // check in DB
+    const student = await Student.findOne({ rollNo: rollNo });
+
+    // send response
+    if (student) {
+      return res.json({ exists: true });
+    }
+
+    res.json({ exists: false });
+
+  } catch (error) {
+    console.error("Check enrollment error:", error);
+    res.status(500).json({ exists: false });
   }
 });

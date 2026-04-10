@@ -65,3 +65,9 @@
 .current {
   color: #888;
 }
+.error {
+  color: red;
+  font-size: 12px;
+  margin-bottom: 10px;
+  margin-left: 5px;
+}

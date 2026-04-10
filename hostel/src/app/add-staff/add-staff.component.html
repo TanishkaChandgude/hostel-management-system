@@ -10,81 +10,105 @@
 
   <h2>➕ Add Staff</h2>
 
-  <form (ngSubmit)="addStaff()">
+ <form #form="ngForm" (ngSubmit)="form.valid && addStaff()">
 
-    <!-- Name -->
-    <div class="input-group">
-      <span class="input-group-text">
-        <i class="fas fa-user"></i>
-      </span>
-      <input type="text"
-             class="form-control"
-             placeholder="Name"
-             [(ngModel)]="staff.name"
-             name="name"
-             required>
-    </div>
+  <!-- Name -->
+  <div class="input-group">
+    <span class="input-group-text">
+      <i class="fas fa-user"></i>
+    </span>
+    <input type="text"
+           class="form-control"
+           placeholder="Name"
+           [(ngModel)]="staff.name"
+           name="name"
+           required
+           #name="ngModel">
+  </div>
+  <div class="error" *ngIf="name.invalid && name.touched">
+    <small>Name is required</small>
+  </div>
 
-    <!-- Role Dropdown -->
-    <div class="input-group">
-      <span class="input-group-text">
-        <i class="fas fa-briefcase"></i>
-      </span>
-      <select class="form-control"
-              [(ngModel)]="staff.role"
-              name="role"
-              required>
-        <option value="" disabled selected>Select Role</option>
-        <option>Electrician</option>
-        <option>Plumber</option>
-        <option>Warden</option>
-        <option>Security</option>
-      </select>
-    </div>
+  <!-- Role -->
+  <div class="input-group">
+    <span class="input-group-text">
+      <i class="fas fa-briefcase"></i>
+    </span>
+    <select class="form-control"
+            [(ngModel)]="staff.role"
+            name="role"
+            required
+            #role="ngModel">
+      <option value="" disabled>Select Role</option>
+      <option>Electrician</option>
+      <option>Plumber</option>
+      <option>Warden</option>
+      <option>Security</option>
+    </select>
+  </div>
+  <div class="error" *ngIf="role.invalid && role.touched">
+    <small>Role is required</small>
+  </div>
 
-    <!-- Phone -->
-    <div class="input-group">
-      <span class="input-group-text">
-        <i class="fas fa-phone"></i>
-      </span>
-      <input type="text"
-             class="form-control"
-             placeholder="Phone"
-             [(ngModel)]="staff.phone"
-             name="phone"
-             required>
-    </div>
+  <!-- Phone -->
+  <div class="input-group">
+    <span class="input-group-text">
+      <i class="fas fa-phone"></i>
+    </span>
+    <input type="text"
+           class="form-control"
+           placeholder="Phone"
+           [(ngModel)]="staff.phone"
+           name="phone"
+           required
+           pattern="^[6-9]\d{9}$"
+           maxlength="10"
+           #phone="ngModel"
+           (keypress)="allowOnlyNumbers($event)">
+  </div>
+  <div class="error" *ngIf="phone.invalid && phone.touched">
+    <small *ngIf="phone.errors?.['required']">Phone is required</small>
+    <small *ngIf="phone.errors?.['pattern']">Enter valid 10-digit number</small>
+  </div>
 
-    <!-- Email -->
-    <div class="input-group">
-      <span class="input-group-text">
-        <i class="fas fa-envelope"></i>
-      </span>
-      <input type="email"
-             class="form-control"
-             placeholder="Email"
-             [(ngModel)]="staff.email"
-             name="email"
-             required>
-    </div>
+  <!-- Email -->
+  <div class="input-group">
+    <span class="input-group-text">
+      <i class="fas fa-envelope"></i>
+    </span>
+    <input type="email"
+           class="form-control"
+           placeholder="Email"
+           [(ngModel)]="staff.email"
+           name="email"
+           required
+           #email="ngModel">
+  </div>
+  <div class="error" *ngIf="email.invalid && email.touched">
+    <small *ngIf="email.errors?.['required']">Email is required</small>
+    <small *ngIf="email.errors?.['email']">Enter valid email</small>
+  </div>
 
-    <!-- Department -->
-    <div class="input-group">
-      <span class="input-group-text">
-        <i class="fas fa-building"></i>
-      </span>
-      <input type="text"
-             class="form-control"
-             placeholder="Department"
-             [(ngModel)]="staff.department"
-             name="department">
-    </div>
+  <!-- Department -->
+  <div class="input-group">
+    <span class="input-group-text">
+      <i class="fas fa-building"></i>
+    </span>
+    <input type="text"
+           class="form-control"
+           placeholder="Department"
+           [(ngModel)]="staff.department"
+           name="department"
+           required
+           #department="ngModel">
+  </div>
+  <div class="error" *ngIf="department.invalid && department.touched">
+    <small>Department is required</small>
+  </div>
 
-    <!-- Submit Button -->
-    <button type="submit" class="btn-submit">
-      Add Staff
-    </button>
+  <!-- Submit -->
+  <button type="submit" class="btn-submit">
+    Add Staff
+  </button>
 
-  </form>
-
-</div>
+</form>

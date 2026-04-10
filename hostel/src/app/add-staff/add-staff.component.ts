@@ -18,7 +18,12 @@ export class AddStaffComponent {
   };
 
   constructor(private http: HttpClient) {}
-
+allowOnlyNumbers(event: any){
+  const charCode = event.which ? event.which : event.keyCode;
+  if (charCode < 48 || charCode > 57) {
+    event.preventDefault();
+  }
+}
   // ➕ Add staff
   addStaff() {
     if (!this.staff.name || !this.staff.role || !this.staff.phone || !this.staff.email) {
